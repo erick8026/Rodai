@@ -3,16 +3,16 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
 let _supabase: SupabaseClient | null = null
 
 export function getSupabase(): SupabaseClient | null {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!url || !key) return null
+  // Server side: always create a fresh client with no-store fetch to bypass Next.js cache
   if (typeof window === 'undefined') {
-    // Server side
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    if (!url || !key) return null
+    return createClient(url, key, {
+      global: { fetch: (input, init) => fetch(input as RequestInfo, { ...init, cache: 'no-store' }) },
+    })
   }
   if (!_supabase) {
-    const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    if (!url || !key) return null
     _supabase = createClient(url, key)
   }
   return _supabase
