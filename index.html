@@ -260,5 +260,40 @@
   </footer>
 
   <script src="script.js"></script>
+
+<!-- RODAI Chatbot Widget -->
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+  createChat({
+    webhookUrl: 'https://n8n-labem.84.247.136.20.sslip.io/webhook/b5c6d7e8-f9a0-4b1c-8d2e-3f4a5b6c7d8e/chat',
+    mode: 'window',
+    chatInputKey: 'chatInput',
+    chatSessionKey: 'sessionId',
+    defaultLanguage: 'es',
+    initialMessages: [
+      'Hola! Soy el asistente virtual de RODAI.',
+      'Puedo ayudarte a conocer nuestros planes Lia Rodai y Elian Rodai. Que deseas saber?'
+    ],
+    i18n: {
+      en: {
+        title: 'RODAI Assistant',
+        subtitle: 'Ask me about Lia Rodai and Elian Rodai',
+        footer: '',
+        getStarted: 'Start Chat',
+        inputPlaceholder: 'Type your message...',
+        closeButtonTooltip: 'Close'
+      },
+      es: {
+        title: 'Asistente RODAI',
+        subtitle: 'Preguntame sobre Lia Rodai y Elian Rodai',
+        footer: '',
+        getStarted: 'Iniciar chat',
+        inputPlaceholder: 'Escribe tu mensaje...',
+        closeButtonTooltip: 'Cerrar'
+      }
+    }
+  });
+</script>
 </body>
 </html>
