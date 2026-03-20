@@ -1,7 +1,8 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
-type PieData = { name: string; value: number; color: string }
+type PieData = { name: string; value: number; color: string; estado?: string }
 
 function CustomTooltip({ active, payload }: any) {
   if (active && payload?.length) {
@@ -11,13 +12,19 @@ function CustomTooltip({ active, payload }: any) {
         <p className="text-2xl font-bold" style={{ color: payload[0].payload.color }}>
           {payload[0].value}
         </p>
+        <p className="text-xs text-gray-400 mt-1">Click para filtrar</p>
       </div>
     )
   }
   return null
 }
 
-function PieSection({ title, data, subtitle }: { title: string; data: PieData[]; subtitle?: string }) {
+function PieSection({
+  title, data, subtitle, onSliceClick
+}: {
+  title: string; data: PieData[]; subtitle?: string
+  onSliceClick?: (entry: PieData) => void
+}) {
   const total = data.reduce((s, d) => s + d.value, 0)
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
@@ -39,6 +46,8 @@ function PieSection({ title, data, subtitle }: { title: string; data: PieData[];
                 outerRadius={100}
                 paddingAngle={3}
                 dataKey="value"
+                onClick={onSliceClick ? (entry) => onSliceClick(entry as PieData) : undefined}
+                style={onSliceClick ? { cursor: 'pointer' } : undefined}
               >
                 {data.map((entry, i) => (
                   <Cell key={i} fill={entry.color} stroke="transparent" />
@@ -50,13 +59,16 @@ function PieSection({ title, data, subtitle }: { title: string; data: PieData[];
               />
             </PieChart>
           </ResponsiveContainer>
-          {/* Center total */}
           <div className="flex flex-wrap gap-2 mt-2">
             {data.map(d => (
-              <div key={d.name} className="flex items-center gap-1.5">
+              <button
+                key={d.name}
+                onClick={() => onSliceClick?.(d)}
+                className={`flex items-center gap-1.5 ${onSliceClick ? 'hover:opacity-70 transition cursor-pointer' : ''}`}
+              >
                 <span className="w-2.5 h-2.5 rounded-full inline-block" style={{ background: d.color }} />
                 <span className="text-xs text-gray-500">{d.name}: <strong>{d.value}</strong></span>
-              </div>
+              </button>
             ))}
           </div>
         </>
@@ -65,18 +77,34 @@ function PieSection({ title, data, subtitle }: { title: string; data: PieData[];
   )
 }
 
-export default function DashboardCharts({ byEstado, byIdioma }: { byEstado: PieData[]; byIdioma: PieData[] }) {
+export default function DashboardCharts({
+  byEstado, byIdioma
+}: {
+  byEstado: PieData[]; byIdioma: PieData[]
+}) {
+  const router = useRouter()
+
+  function handleEstadoClick(entry: PieData) {
+    if (entry.estado) router.push(`/leads?estado=${entry.estado}`)
+  }
+
+  function handleIdiomaClick(entry: PieData) {
+    router.push(`/leads?idioma=${encodeURIComponent(entry.name)}`)
+  }
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <PieSection
         title="Oportunidades por estado"
-        subtitle="Distribución del pipeline actual"
+        subtitle="Haz clic en un estado para filtrar"
         data={byEstado}
+        onSliceClick={handleEstadoClick}
       />
       <PieSection
         title="Leads por idioma"
-        subtitle="Origen de conversaciones"
+        subtitle="Haz clic en un idioma para filtrar"
         data={byIdioma}
+        onSliceClick={handleIdiomaClick}
       />
     </div>
   )
