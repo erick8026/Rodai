@@ -29,6 +29,9 @@ export async function POST(req: NextRequest) {
     faq_respuestas: body.faq_respuestas ?? '', idioma: body.idioma ?? 'espanol',
     fecha: body.fecha ?? new Date().toLocaleDateString('es-CR'),
     fuente, estado: body.estado ?? 'nuevo', notas: body.notas ?? '',
+    paquetes_contratados: body.paquetes_contratados ?? '[]',
+    frecuencia_pago: body.frecuencia_pago ?? 'mensual',
+    valor_oportunidad: Number(body.valor_oportunidad) || 0,
   }, { onConflict: 'telefono' })
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json({ ok: true, data })
