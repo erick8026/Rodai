@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/auth'
-import { supabase, ESTADOS, Lead } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase'
 import Sidebar from '@/components/Sidebar'
 import LeadsTable from '@/components/LeadsTable'
 
@@ -10,7 +10,7 @@ export default async function LeadsPage() {
   const session = await getSession()
   if (!session) redirect('/')
 
-  const { data } = await supabase
+  const { data } = await getSupabase()
     .from('leads')
     .select('*')
     .order('created_at', { ascending: false })
@@ -19,11 +19,9 @@ export default async function LeadsPage() {
     <div className="flex min-h-screen">
       <Sidebar />
       <main className="flex-1 p-8 overflow-auto">
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Oportunidades</h1>
-            <p className="text-gray-500 text-sm mt-1">{data?.length ?? 0} leads registrados</p>
-          </div>
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold text-gray-900">Oportunidades</h1>
+          <p className="text-gray-500 text-sm mt-1">{data?.length ?? 0} leads registrados</p>
         </div>
         <LeadsTable leads={data ?? []} />
       </main>
