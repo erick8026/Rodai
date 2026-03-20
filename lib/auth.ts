@@ -1,15 +1,18 @@
 import { SignJWT, jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET ?? 'rodai-crm-secret-key-2026')
+const secret = new TextEncoder().encode(
+  process.env.JWT_SECRET ?? 'rodai-crm-fallback-secret-change-in-production'
+)
 const COOKIE = 'rodai_crm_session'
+const MAX_AGE = 60 * 60 * 8 // 8 hours
 
-export async function createSession(username: string) {
-  const token = await new SignJWT({ username })
+export async function createSession(userId: string, email: string) {
+  return new SignJWT({ userId, email })
     .setProtectedHeader({ alg: 'HS256' })
     .setExpirationTime('8h')
+    .setIssuedAt()
     .sign(secret)
-  return token
 }
 
 export async function verifySession(token: string) {
@@ -28,4 +31,4 @@ export async function getSession() {
   return verifySession(token)
 }
 
-export { COOKIE }
+export { COOKIE, MAX_AGE }
