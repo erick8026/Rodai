@@ -10,10 +10,14 @@ export default async function LeadsPage() {
   const session = await getSession()
   if (!session) redirect('/')
 
-  const { data } = await getSupabase()
-    .from('leads')
-    .select('*')
-    .order('created_at', { ascending: false })
+  let leads: any[] = []
+  try {
+    const sb = getSupabase()
+    if (sb) {
+      const { data } = await sb.from('leads').select('*').order('created_at', { ascending: false })
+      leads = data ?? []
+    }
+  } catch (_) {}
 
   return (
     <div className="flex min-h-screen">
@@ -21,9 +25,9 @@ export default async function LeadsPage() {
       <main className="flex-1 p-8 overflow-auto">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Oportunidades</h1>
-          <p className="text-gray-500 text-sm mt-1">{data?.length ?? 0} leads registrados</p>
+          <p className="text-gray-500 text-sm mt-1">{leads.length} leads registrados</p>
         </div>
-        <LeadsTable leads={data ?? []} />
+        <LeadsTable leads={leads} />
       </main>
     </div>
   )
