@@ -6,9 +6,15 @@ import LeadsTable from '@/components/LeadsTable'
 
 export const dynamic = 'force-dynamic'
 
-export default async function LeadsPage() {
+export default async function LeadsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ estado?: string; idioma?: string }>
+}) {
   const session = await getSession()
   if (!session) redirect('/')
+
+  const { estado, idioma } = await searchParams
 
   let leads: any[] = []
   try {
@@ -27,7 +33,7 @@ export default async function LeadsPage() {
           <h1 className="text-2xl font-bold text-gray-900">Oportunidades</h1>
           <p className="text-gray-500 text-sm mt-1">{leads.length} leads registrados</p>
         </div>
-        <LeadsTable leads={leads} />
+        <LeadsTable leads={leads} initialEstado={estado ?? ''} initialIdioma={idioma ?? ''} />
       </main>
     </div>
   )
