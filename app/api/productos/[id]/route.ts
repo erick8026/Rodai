@@ -12,6 +12,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const { data, error } = await sb.from('productos').update({
     sku: body.sku, nombre: body.nombre,
     descripcion: body.descripcion ?? '',
+    costo: Number(body.costo) || 0,
     precio_mensual: Number(body.precio_mensual) || 0,
     precio_anual: Number(body.precio_anual) || 0,
     activo: body.activo ?? true,
