@@ -1,23 +1,35 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createSession, COOKIE } from '@/lib/auth'
+import { createSession, COOKIE, MAX_AGE } from '@/lib/auth'
+import { getSupabase } from '@/lib/supabase'
 
 export async function POST(req: NextRequest) {
-  const { username, password } = await req.json()
+  const { email, password } = await req.json()
 
-  const validUser = process.env.CRM_USERNAME ?? 'erickmr'
-  const validPass = process.env.CRM_PASSWORD ?? 'S0p0r@90.41$2026'
-
-  if (username !== validUser || password !== validPass) {
-    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
+  if (!email || !password) {
+    return NextResponse.json({ error: 'Email y contraseña requeridos' }, { status: 400 })
   }
 
-  const token = await createSession(username)
+  const sb = getSupabase()
+  if (!sb) {
+    return NextResponse.json({ error: 'Servicio no disponible' }, { status: 503 })
+  }
+
+  // Supabase Auth validates credentials — password is bcrypt-hashed, never plain text
+  const { data, error } = await sb.auth.signInWithPassword({ email, password })
+
+  if (error || !data.user) {
+    // Generic message — don't reveal whether email or password was wrong
+    return NextResponse.json({ error: 'Credenciales incorrectas' }, { status: 401 })
+  }
+
+  const token = await createSession(data.user.id, data.user.email ?? email)
+
   const res = NextResponse.json({ ok: true })
   res.cookies.set(COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
-    maxAge: 60 * 60 * 8, // 8 hours
+    maxAge: MAX_AGE,
     path: '/',
   })
   return res
