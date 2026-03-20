@@ -23,7 +23,7 @@ export default function NewLeadModal() {
 
   const [form, setForm] = useState({
     nombre: '', empresa: '', telefono: '', correo: '',
-    estado: 'nuevo', notas: '',
+    estado: 'nuevo', notas: '', fecha_cierre_esperada: '',
   })
   const [idiomasSeleccionados, setIdiomasSeleccionados] = useState<string[]>(['espanol'])
   const [paquetesSeleccionados, setPaquetesSeleccionados] = useState<PaqueteAsignado[]>([])
@@ -61,7 +61,7 @@ export default function NewLeadModal() {
   const valorOportunidad = calcularValor(paquetesSeleccionados, frecuencia)
 
   function resetForm() {
-    setForm({ nombre: '', empresa: '', telefono: '', correo: '', estado: 'nuevo', notas: '' })
+    setForm({ nombre: '', empresa: '', telefono: '', correo: '', estado: 'nuevo', notas: '', fecha_cierre_esperada: '' })
     setIdiomasSeleccionados(['espanol'])
     setPaquetesSeleccionados([])
     setFrecuencia('mensual')
@@ -251,16 +251,26 @@ export default function NewLeadModal() {
                 )}
               </div>
 
-              <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">Estado</label>
-                <select
-                  className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={form.estado} onChange={e => set('estado', e.target.value)}
-                >
-                  {Object.entries(ESTADOS).map(([k, v]) => (
-                    <option key={k} value={k}>{v.label}</option>
-                  ))}
-                </select>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Estado</label>
+                  <select
+                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={form.estado} onChange={e => set('estado', e.target.value)}
+                  >
+                    {Object.entries(ESTADOS).map(([k, v]) => (
+                      <option key={k} value={k}>{v.label}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 mb-1">Fecha cierre esperada</label>
+                  <input
+                    type="date"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={form.fecha_cierre_esperada} onChange={e => set('fecha_cierre_esperada', e.target.value)}
+                  />
+                </div>
               </div>
 
               <div>
