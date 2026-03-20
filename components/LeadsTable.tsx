@@ -7,14 +7,17 @@ export default function LeadsTable({
   leads,
   initialEstado = '',
   initialIdioma = '',
+  initialFuente = '',
 }: {
   leads: Lead[]
   initialEstado?: string
   initialIdioma?: string
+  initialFuente?: string
 }) {
   const [search, setSearch] = useState('')
   const [filterEstado, setFilterEstado] = useState(initialEstado)
   const [filterIdioma, setFilterIdioma] = useState(initialIdioma)
+  const [filterFuente, setFilterFuente] = useState(initialFuente)
   const [editId, setEditId] = useState<string | null>(null)
   const [editData, setEditData] = useState<Partial<Lead>>({})
   const [saving, setSaving] = useState(false)
@@ -29,7 +32,8 @@ export default function LeadsTable({
       .some(f => f?.toLowerCase().includes(q))
     const matchEstado = !filterEstado || l.estado === filterEstado
     const matchIdioma = !filterIdioma || l.idioma === filterIdioma
-    return matchSearch && matchEstado && matchIdioma
+    const matchFuente = !filterFuente || l.fuente === filterFuente
+    return matchSearch && matchEstado && matchIdioma && matchFuente
   })
 
   function startEdit(lead: Lead) {
@@ -53,9 +57,10 @@ export default function LeadsTable({
     setSearch('')
     setFilterEstado('')
     setFilterIdioma('')
+    setFilterFuente('')
   }
 
-  const hasFilters = search || filterEstado || filterIdioma
+  const hasFilters = search || filterEstado || filterIdioma || filterFuente
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -88,6 +93,16 @@ export default function LeadsTable({
             {idiomas.map(i => <option key={i} value={i!}>{i}</option>)}
           </select>
         )}
+        <select
+          value={filterFuente}
+          onChange={e => setFilterFuente(e.target.value)}
+          className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">Todas las fuentes</option>
+          <option value="whatsapp">📱 WhatsApp</option>
+          <option value="web">🌐 Web</option>
+          <option value="crm">🖥️ CRM</option>
+        </select>
         {hasFilters && (
           <button
             onClick={clearFilters}
@@ -103,6 +118,7 @@ export default function LeadsTable({
           Mostrando {filtered.length} de {leads.length} leads
           {filterEstado && <span> · Estado: <strong>{ESTADOS[filterEstado]?.label ?? filterEstado}</strong></span>}
           {filterIdioma && <span> · Idioma: <strong>{filterIdioma}</strong></span>}
+          {filterFuente && <span> · Fuente: <strong>{filterFuente}</strong></span>}
         </div>
       )}
 
