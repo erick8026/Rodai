@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Lead, ESTADOS, Producto, PaqueteAsignado, parsePaquetes, calcularValor } from '@/lib/supabase'
+import { Lead, ESTADOS, PROBABILIDAD_POR_ESTADO, Producto, PaqueteAsignado, parsePaquetes, calcularValor } from '@/lib/supabase'
 
 function fmt(n: number) {
   return n.toLocaleString('es-CR', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })
@@ -55,6 +55,8 @@ export default function LeadsTable({
       correo: lead.correo,
       frecuencia_pago: lead.frecuencia_pago ?? 'mensual',
       paquetes: parsePaquetes(lead.paquetes_contratados),
+      fecha_cierre_esperada: lead.fecha_cierre_esperada ?? '',
+      probabilidad: lead.probabilidad ?? PROBABILIDAD_POR_ESTADO[lead.estado] ?? 10,
     })
   }
 
@@ -250,22 +252,54 @@ export default function LeadsTable({
                   {/* Estado */}
                   <td className="px-6 py-4">
                     {editId === lead.id ? (
-                      <select
-                        className="px-2 py-1 border border-gray-200 rounded-lg text-sm"
-                        value={editData.estado ?? lead.estado}
-                        onChange={e => setEditData(p => ({ ...p, estado: e.target.value as Lead['estado'] }))}
-                      >
-                        {Object.entries(ESTADOS).map(([k, v]) => (
-                          <option key={k} value={k}>{v.label}</option>
-                        ))}
-                      </select>
+                      <div className="space-y-1.5 min-w-[160px]">
+                        <select
+                          className="w-full px-2 py-1 border border-gray-200 rounded-lg text-sm"
+                          value={editData.estado ?? lead.estado}
+                          onChange={e => {
+                            const est = e.target.value as Lead['estado']
+                            setEditData(p => ({ ...p, estado: est, probabilidad: PROBABILIDAD_POR_ESTADO[est] ?? p.probabilidad }))
+                          }}
+                        >
+                          {Object.entries(ESTADOS).map(([k, v]) => (
+                            <option key={k} value={k}>{v.label}</option>
+                          ))}
+                        </select>
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs text-gray-500 w-12">Prob.</span>
+                          <input type="number" min="0" max="100"
+                            className="w-full px-2 py-1 border border-gray-200 rounded-lg text-sm"
+                            value={editData.probabilidad ?? ''}
+                            onChange={e => setEditData(p => ({ ...p, probabilidad: Number(e.target.value) }))}
+                          />
+                          <span className="text-xs text-gray-500">%</span>
+                        </div>
+                        <div>
+                          <span className="text-xs text-gray-500 block mb-0.5">Cierre esperado</span>
+                          <input type="date"
+                            className="w-full px-2 py-1 border border-gray-200 rounded-lg text-sm"
+                            value={editData.fecha_cierre_esperada ?? ''}
+                            onChange={e => setEditData(p => ({ ...p, fecha_cierre_esperada: e.target.value }))}
+                          />
+                        </div>
+                      </div>
                     ) : (
-                      <span
-                        className="px-2.5 py-1 rounded-full text-xs font-medium text-white whitespace-nowrap"
-                        style={{ backgroundColor: ESTADOS[lead.estado]?.color ?? '#6b7280' }}
-                      >
-                        {ESTADOS[lead.estado]?.label ?? lead.estado}
-                      </span>
+                      <div className="space-y-1">
+                        <span
+                          className="px-2.5 py-1 rounded-full text-xs font-medium text-white whitespace-nowrap inline-block"
+                          style={{ backgroundColor: ESTADOS[lead.estado]?.color ?? '#6b7280' }}
+                        >
+                          {ESTADOS[lead.estado]?.label ?? lead.estado}
+                        </span>
+                        {lead.probabilidad != null && (
+                          <p className="text-xs text-gray-400">{lead.probabilidad}% prob.</p>
+                        )}
+                        {lead.fecha_cierre_esperada && (
+                          <p className="text-xs text-gray-500">
+                            {new Date(lead.fecha_cierre_esperada).toLocaleDateString('es-CR')}
+                          </p>
+                        )}
+                      </div>
                     )}
                   </td>
 
