@@ -1,7 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { ESTADOS } from '@/lib/supabase'
+import { ESTADOS, Producto, PaqueteAsignado, calcularValor } from '@/lib/supabase'
 
 const IDIOMAS = [
   { value: 'espanol',   label: 'Español' },
@@ -10,10 +10,15 @@ const IDIOMAS = [
   { value: 'aleman',    label: 'Alemán' },
 ]
 
+function fmt(n: number) {
+  return n.toLocaleString('es-CR', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })
+}
+
 export default function NewLeadModal() {
   const [open, setOpen] = useState(false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [productos, setProductos] = useState<Producto[]>([])
   const router = useRouter()
 
   const [form, setForm] = useState({
@@ -21,6 +26,14 @@ export default function NewLeadModal() {
     estado: 'nuevo', notas: '',
   })
   const [idiomasSeleccionados, setIdiomasSeleccionados] = useState<string[]>(['espanol'])
+  const [paquetesSeleccionados, setPaquetesSeleccionados] = useState<PaqueteAsignado[]>([])
+  const [frecuencia, setFrecuencia] = useState<'mensual' | 'anual'>('mensual')
+
+  useEffect(() => {
+    if (open && productos.length === 0) {
+      fetch('/api/productos').then(r => r.ok ? r.json() : []).then(setProductos).catch(() => {})
+    }
+  }, [open])
 
   function set(k: string, v: string) {
     setForm(p => ({ ...p, [k]: v }))
@@ -29,19 +42,29 @@ export default function NewLeadModal() {
   function toggleIdioma(val: string) {
     setIdiomasSeleccionados(prev => {
       if (prev.includes(val)) {
-        // Don't allow deselecting the last one
         if (prev.length === 1) return prev
         return prev.filter(i => i !== val)
       }
-      // Max 2 languages
       if (prev.length >= 2) return prev
       return [...prev, val]
     })
   }
 
+  function togglePaquete(p: Producto) {
+    setPaquetesSeleccionados(prev => {
+      const exists = prev.find(x => x.id === p.id)
+      if (exists) return prev.filter(x => x.id !== p.id)
+      return [...prev, { id: p.id, sku: p.sku, nombre: p.nombre, precio_mensual: p.precio_mensual, precio_anual: p.precio_anual }]
+    })
+  }
+
+  const valorOportunidad = calcularValor(paquetesSeleccionados, frecuencia)
+
   function resetForm() {
     setForm({ nombre: '', empresa: '', telefono: '', correo: '', estado: 'nuevo', notas: '' })
     setIdiomasSeleccionados(['espanol'])
+    setPaquetesSeleccionados([])
+    setFrecuencia('mensual')
     setError('')
   }
 
@@ -56,6 +79,9 @@ export default function NewLeadModal() {
         ...form,
         idioma: idiomasSeleccionados.join(','),
         fuente: 'crm',
+        paquetes_contratados: JSON.stringify(paquetesSeleccionados),
+        frecuencia_pago: frecuencia,
+        valor_oportunidad: valorOportunidad,
       }),
     })
     if (res.ok) {
@@ -133,7 +159,7 @@ export default function NewLeadModal() {
                 </div>
               </div>
 
-              {/* Idiomas — checkboxes, max 2 */}
+              {/* Idiomas */}
               <div>
                 <label className="block text-xs font-medium text-gray-700 mb-2">
                   Idiomas del asistente
@@ -174,6 +200,53 @@ export default function NewLeadModal() {
                 {idiomasSeleccionados.length > 0 && (
                   <p className="text-xs text-gray-400 mt-1.5">
                     Seleccionado: <strong className="text-gray-600">{idiomasSeleccionados.map(i => IDIOMAS.find(l => l.value === i)?.label).join(' + ')}</strong>
+                  </p>
+                )}
+              </div>
+
+              {/* Paquetes contratados */}
+              <div>
+                <label className="block text-xs font-medium text-gray-700 mb-2">Paquetes contratados</label>
+                {/* Frecuencia toggle */}
+                <div className="flex gap-1 bg-gray-100 rounded-lg p-0.5 w-fit mb-2">
+                  {(['mensual', 'anual'] as const).map(f => (
+                    <button key={f} type="button" onClick={() => setFrecuencia(f)}
+                      className={`px-4 py-1.5 rounded-md text-xs font-medium transition ${
+                        frecuencia === f ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500'
+                      }`}
+                    >
+                      {f === 'mensual' ? 'Mensual' : 'Anual'}
+                    </button>
+                  ))}
+                </div>
+                <div className="border border-gray-200 rounded-xl overflow-hidden">
+                  {productos.length === 0 ? (
+                    <p className="px-4 py-3 text-xs text-gray-400">
+                      Sin productos en catálogo. Ve a Configuración → Catálogo de Productos.
+                    </p>
+                  ) : (
+                    <div className="divide-y divide-gray-50">
+                      {productos.map(p => {
+                        const sel = paquetesSeleccionados.some(x => x.id === p.id)
+                        const precio = frecuencia === 'anual'
+                          ? (p.precio_anual > 0 ? p.precio_anual : p.precio_mensual * 12)
+                          : p.precio_mensual
+                        return (
+                          <label key={p.id} className="flex items-center gap-3 px-4 py-2.5 hover:bg-gray-50 cursor-pointer">
+                            <input type="checkbox" checked={sel} onChange={() => togglePaquete(p)}
+                              className="rounded accent-blue-600" />
+                            <span className="font-mono text-xs bg-gray-100 px-1.5 py-0.5 rounded text-gray-600">{p.sku}</span>
+                            <span className="text-sm text-gray-700 flex-1">{p.nombre}</span>
+                            <span className="text-sm font-medium text-gray-800">{fmt(precio)}</span>
+                          </label>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+                {valorOportunidad > 0 && (
+                  <p className="text-sm font-semibold text-blue-700 mt-2">
+                    Valor oportunidad: {fmt(valorOportunidad)} / {frecuencia}
                   </p>
                 )}
               </div>
