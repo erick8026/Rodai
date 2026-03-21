@@ -27,6 +27,8 @@ export default function LeadsTable({
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState('')
   const [expandedFaq, setExpandedFaq] = useState<string | null>(null)
+  const [generatingPropuesta, setGeneratingPropuesta] = useState<string | null>(null)
+  const [copiedPropuesta, setCopiedPropuesta] = useState<string | null>(null)
   const [productos, setProductos] = useState<Producto[]>([])
   const router = useRouter()
 
@@ -107,6 +109,27 @@ export default function LeadsTable({
     setEditId(null)
     setSaveError('')
     router.refresh()
+  }
+
+  async function generarPropuesta(lead: Lead) {
+    setGeneratingPropuesta(lead.id)
+    const res = await fetch('/api/propuestas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        lead_id: lead.id,
+        cliente_nombre: lead.nombre || 'Cliente',
+        cliente_empresa: lead.empresa || '',
+        plan_sku: 'LIA-001',
+      }),
+    })
+    setGeneratingPropuesta(null)
+    if (!res.ok) return
+    const { token } = await res.json()
+    const url = `${window.location.origin}/propuesta/${token}`
+    await navigator.clipboard.writeText(url)
+    setCopiedPropuesta(lead.id)
+    setTimeout(() => setCopiedPropuesta(null), 3000)
   }
 
   function clearFilters() {
@@ -451,12 +474,25 @@ export default function LeadsTable({
                         {saveError && <p className="text-xs text-red-500 max-w-[140px]">{saveError}</p>}
                       </div>
                     ) : (
-                      <button
-                        onClick={() => startEdit(lead)}
-                        className="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs hover:bg-gray-200 transition"
-                      >
-                        Editar
-                      </button>
+                      <div className="flex flex-col gap-1.5">
+                        <button
+                          onClick={() => startEdit(lead)}
+                          className="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs hover:bg-gray-200 transition"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          onClick={() => generarPropuesta(lead)}
+                          disabled={generatingPropuesta === lead.id}
+                          className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs hover:bg-blue-700 disabled:opacity-60 transition whitespace-nowrap"
+                        >
+                          {generatingPropuesta === lead.id
+                            ? '...'
+                            : copiedPropuesta === lead.id
+                            ? '✓ Link copiado'
+                            : '📄 Propuesta'}
+                        </button>
+                      </div>
                     )}
                   </td>
                 </tr>
