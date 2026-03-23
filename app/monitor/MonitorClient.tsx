@@ -1,9 +1,5 @@
 'use client'
 import { useEffect, useState, useRef } from 'react'
-import { createClient } from '@supabase/supabase-js'
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const SUPABASE_ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
 type Conversacion = {
   id: number
@@ -38,11 +34,11 @@ type WorkflowStat = {
 }
 
 const WORKFLOWS_MONITOREADOS: WorkflowStat[] = [
-  { name: 'RODAI AGENTE', id: '51OJSi9yYwgdUdAN', hoy: 0, errores: 0, activo: true },
-  { name: 'MAESTRORODAI', id: 'eiOSOwVau1uQJOPF', hoy: 0, errores: 0, activo: true },
-  { name: 'Health Check', id: 'kpSCUPFJS3iMRIdw', hoy: 0, errores: 0, activo: true },
-  { name: 'Sesiones Atascadas', id: 'PPOSmVW9pMSBFCur', hoy: 0, errores: 0, activo: true },
-  { name: 'Error Monitor', id: 'dX2VH2L1BNuj4glq', hoy: 0, errores: 0, activo: true },
+  { name: 'RODAI AGENTE', id: 'ICNcYJoaRZTqarIE', hoy: 0, errores: 0, activo: true },
+  { name: 'MAESTRORODAI', id: 'ulLJOb6ThtbhuTiR', hoy: 0, errores: 0, activo: true },
+  { name: 'Health Check', id: 'POPunBI94nnVANLo', hoy: 0, errores: 0, activo: true },
+  { name: 'Sesiones Atascadas', id: '7N991ItWRQckpn5U', hoy: 0, errores: 0, activo: true },
+  { name: 'Error Monitor', id: 'MrWLoKBThCS7bN3Q', hoy: 0, errores: 0, activo: true },
 ]
 
 // Traffic data from real n8n analysis (El Salvador, UTC-6)
@@ -77,15 +73,15 @@ function StatCard({ label, value, sub, color }: { label: string; value: string |
 }
 
 export default function MonitorClient() {
-  const sb = createClient(SUPABASE_URL, SUPABASE_ANON)
   const [conversaciones, setConversaciones] = useState<Conversacion[]>([])
   const [incidentes, setIncidentes] = useState<Incidente[]>([])
   const [connected, setConnected] = useState(false)
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date())
   const [pulsing, setPulsing] = useState(false)
+  const [fetchError, setFetchError] = useState<string | null>(null)
   const feedRef = useRef<HTMLDivElement>(null)
+  const prevCountRef = useRef(0)
 
-  // Hora actual El Salvador
   const horaSV = new Date().toLocaleString('es-SV', {
     timeZone: 'America/El_Salvador', hour: '2-digit', hour12: false
   })
@@ -93,7 +89,6 @@ export default function MonitorClient() {
   const esPico = [20, 21, 23, 10, 13].includes(horaActual)
   const esBajoTrafico = horaActual >= 0 && horaActual <= 8
 
-  // Stats derivados
   const hoy = new Date().toISOString().split('T')[0]
   const convHoy = conversaciones.filter(c => c.created_at.startsWith(hoy)).length
   const erroresHoy = incidentes.filter(i => i.created_at.startsWith(hoy)).length
@@ -101,61 +96,60 @@ export default function MonitorClient() {
   const tasaExito = conversaciones.length > 0
     ? Math.round((convExitosas / conversaciones.length) * 100) : 100
 
-  // Pulse animation on new data
   function triggerPulse() {
     setPulsing(true)
     setTimeout(() => setPulsing(false), 600)
   }
 
+  async function fetchData() {
+    try {
+      const res = await fetch('/api/monitor', { cache: 'no-store' })
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        setFetchError(body.error ?? `Error ${res.status}`)
+        setConnected(false)
+        return
+      }
+      const data = await res.json()
+      const newCount = (data.conversaciones ?? []).length
+      if (newCount > prevCountRef.current) triggerPulse()
+      prevCountRef.current = newCount
+      setConversaciones(data.conversaciones ?? [])
+      setIncidentes(data.incidentes ?? [])
+      setLastUpdate(new Date())
+      setConnected(true)
+      setFetchError(null)
+    } catch {
+      setConnected(false)
+      setFetchError('Error de conexión al servidor')
+    }
+  }
+
   useEffect(() => {
-    // Carga inicial
-    async function load() {
-      const [{ data: conv }, { data: inc }] = await Promise.all([
-        sb.from('conversaciones_log').select('*').order('created_at', { ascending: false }).limit(50),
-        sb.from('incidentes').select('*').order('created_at', { ascending: false }).limit(20),
-      ])
-      setConversaciones((conv as Conversacion[]) ?? [])
-      setIncidentes((inc as Incidente[]) ?? [])
-    }
-    load()
-
-    // Suscripción Realtime — conversaciones
-    const chanConv = sb
-      .channel('conversaciones_live')
-      .on('postgres_changes', {
-        event: 'INSERT',
-        schema: 'public',
-        table: 'conversaciones_log',
-      }, (payload) => {
-        setConversaciones(prev => [payload.new as Conversacion, ...prev].slice(0, 50))
-        setLastUpdate(new Date())
-        triggerPulse()
-      })
-      .subscribe((status) => {
-        setConnected(status === 'SUBSCRIBED')
-      })
-
-    // Suscripción Realtime — incidentes
-    const chanInc = sb
-      .channel('incidentes_live')
-      .on('postgres_changes', {
-        event: 'INSERT',
-        schema: 'public',
-        table: 'incidentes',
-      }, (payload) => {
-        setIncidentes(prev => [payload.new as Incidente, ...prev].slice(0, 20))
-        setLastUpdate(new Date())
-        triggerPulse()
-      })
-      .subscribe()
-
-    return () => {
-      sb.removeChannel(chanConv)
-      sb.removeChannel(chanInc)
-    }
+    fetchData()
+    const interval = setInterval(fetchData, 5000)
+    return () => clearInterval(interval)
   }, [])
 
   const maxTrafico = Math.max(...TRAFICO_HORAS, 1)
+
+  if (fetchError) {
+    return (
+      <div className="max-w-7xl mx-auto">
+        <div className="bg-red-950 border border-red-800 rounded-xl p-8 text-center">
+          <p className="text-4xl mb-3">⚠️</p>
+          <p className="text-red-300 font-semibold">{fetchError}</p>
+          <p className="text-slate-400 text-sm mt-2">Verifica la configuración de Supabase en las variables de entorno de Vercel.</p>
+          <button
+            onClick={fetchData}
+            className="mt-4 px-4 py-2 bg-red-800 hover:bg-red-700 text-white rounded-lg text-sm"
+          >
+            Reintentar
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
@@ -166,7 +160,7 @@ export default function MonitorClient() {
           <h1 className="text-2xl font-bold text-white">Monitor de Agente</h1>
           <p className="text-slate-400 text-sm">
             {connected
-              ? <span className="text-emerald-400">● Tiempo real activo</span>
+              ? <span className="text-emerald-400">● Actualización cada 5s</span>
               : <span className="text-yellow-400">○ Conectando...</span>}
             {' · '}
             <span className="text-slate-500">
@@ -242,9 +236,6 @@ export default function MonitorClient() {
               </div>
             ))}
           </div>
-          <p className="text-xs text-slate-600 mt-3">
-            Contadores de hoy se registran cuando n8n comience a loguear conversaciones
-          </p>
         </div>
 
         {/* Heatmap tráfico por hora */}
@@ -308,7 +299,7 @@ export default function MonitorClient() {
               <div className="text-center py-12 text-slate-600">
                 <p className="text-4xl mb-3">📡</p>
                 <p className="text-sm">Esperando conversaciones...</p>
-                <p className="text-xs mt-1">Se mostrarán aquí en tiempo real cuando lleguen mensajes</p>
+                <p className="text-xs mt-1">Se mostrarán aquí cuando lleguen mensajes</p>
               </div>
             ) : conversaciones.map(c => (
               <div
@@ -325,7 +316,7 @@ export default function MonitorClient() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-white text-sm font-medium truncate">
-                      {c.cliente_telefono?.replace('@s.whatsapp.net','') || 'Desconocido'}
+                      {c.cliente_telefono?.replace('@s.whatsapp.net','').replace('@lid','') || 'Desconocido'}
                     </p>
                     <span className="text-slate-500 text-xs shrink-0">{fmt(c.created_at)}</span>
                   </div>
@@ -385,16 +376,6 @@ export default function MonitorClient() {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* SQL info */}
-      <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4">
-        <p className="text-xs text-slate-500">
-          <span className="text-slate-400 font-medium">Nota:</span> Para activar el feed en tiempo real, ejecuta el SQL de creación de tablas en Supabase Dashboard y activa Realtime en las tablas{' '}
-          <code className="text-blue-400">conversaciones_log</code> e{' '}
-          <code className="text-blue-400">incidentes</code>.
-          Los datos llegarán automáticamente cuando n8n registre cada conversación.
-        </p>
       </div>
     </div>
   )
