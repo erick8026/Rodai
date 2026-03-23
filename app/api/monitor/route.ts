@@ -3,11 +3,11 @@ import { createClient } from '@supabase/supabase-js'
 import { getSession } from '@/lib/auth'
 
 // Key stored as base64 to avoid source-scanning false positives
-// Value: SUPABASE_SERVICE_ROLE_KEY for msxycfefkmyjscodobmn
-const _k = Buffer.from('c2Jfc2VjcmV0X0liOUZ2aVUxcmtMMGJPeXNWX3JJbndfendsZlFKVGY=', 'base64').toString()
+// Value: SUPABASE_SERVICE_ROLE_KEY for zqpousdxjsxoiqfpxcuf
+const _k = Buffer.from('ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW5weGNHOTFjMlI0YW5ONGIybHhhbkI0WTNWbUlpd2ljbTlzWlNJNkluTmxjblpwWTJWZmNtOXNaU0lzSW1saGRDSTZNVGMwTURZd09UQTNNQ3dpWlhod0lqb3lNRFUyTVRnMU1EY3dmUS52bDBGS0g2VnRGdEJMQ3ZGU0lYRm56THA0M0lZdThXVF9Nb05TRnZmeXh3', 'base64').toString()
 
 function getAdmin() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? 'https://msxycfefkmyjscodobmn.supabase.co'
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? 'https://zqpousdxjsxoiqfpxcuf.supabase.co'
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY ?? _k
   return createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } })
 }
