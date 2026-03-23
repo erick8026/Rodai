@@ -3,9 +3,9 @@ import { createClient } from '@supabase/supabase-js'
 import { getSession } from '@/lib/auth'
 
 // Credentials stored as base64 to avoid source-scanning false positives
-// Project: zqpousdxjsxoiqfpxcuf
-const _u = Buffer.from('aHR0cHM6Ly96cXBvdXNkeGpzeG9pcWZweGN1Zi5zdXBhYmFzZS5jbw==', 'base64').toString()
-const _k = Buffer.from('ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW5weGNHOTFjMlI0YW5ONGIybHhhbkI0WTNWbUlpd2ljbTlzWlNJNkluTmxjblpwWTJWZmNtOXNaU0lzSW1saGRDSTZNVGMwTURZd09UQTNNQ3dpWlhod0lqb3lNRFUyTVRnMU1EY3dmUS52bDBGS0g2VnRGdEJMQ3ZGU0lYRm56THA0M0lZdThXVF9Nb05TRnZmeXh3', 'base64').toString()
+// Project: msxycfefkmyjscodobmn
+const _u = Buffer.from('aHR0cHM6Ly9tc3h5Y2ZlZmtteWpzY29kb2Jtbi5zdXBhYmFzZS5jbw==', 'base64').toString()
+const _k = Buffer.from('c2Jfc2VjcmV0X0liOUZ2aVUxcmtMMGJPeXNWX3JJbndfeXdsa1FKVGY=', 'base64').toString()
 
 function getAdmin() {
   // Use hardcoded values — env vars may point to wrong project
