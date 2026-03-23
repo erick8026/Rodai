@@ -316,7 +316,11 @@ export default function MonitorClient() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-white text-sm font-medium truncate">
-                      {c.cliente_telefono?.replace('@s.whatsapp.net','').replace('@lid','') || 'Desconocido'}
+                      {(() => {
+                        const raw = c.cliente_telefono || ''
+                        if (raw.includes('@lid')) return `ID:${raw.replace('@lid','').slice(-8)}`
+                        return raw.replace('@s.whatsapp.net','') || 'Desconocido'
+                      })()}
                     </p>
                     <span className="text-slate-500 text-xs shrink-0">{fmt(c.created_at)}</span>
                   </div>
