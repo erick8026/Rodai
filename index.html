@@ -1,33 +1,522 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RODAI | Automatización de ventas por WhatsApp con IA</title>
-  <meta name="description" content="RODAI ayuda a empresas a automatizar respuestas, captar leads y vender más por WhatsApp con inteligencia artificial.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta
+    name="description"
+    content="RODAI ayuda a empresas a atender clientes, agendar citas y generar oportunidades por WhatsApp con inteligencia artificial."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #07112f;
+      --bg-soft: #0c1945;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.12);
+      --text: #ecf2ff;
+      --muted: #b9c6ee;
+      --line: rgba(255, 255, 255, 0.14);
+      --blue: #33b6ff;
+      --purple: #8f4cff;
+      --green: #29d17d;
+      --white: #ffffff;
+      --shadow: 0 18px 60px rgba(3, 8, 30, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(143, 76, 255, 0.25), transparent 28%),
+        radial-gradient(circle at top left, rgba(51, 182, 255, 0.18), transparent 24%),
+        linear-gradient(180deg, #060d27 0%, #081338 40%, #060d27 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section { padding: 88px 0; }
+    .center { text-align: center; }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .8rem;
+    }
+
+    .section-heading h2,
+    .hero h1,
+    .cta-band h2 {
+      margin: 0;
+      line-height: 1.08;
+    }
+
+    .section-heading p,
+    .hero-text {
+      color: var(--muted);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: rgba(5, 10, 26, 0.7);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: var(--shadow);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+    }
+
+    nav a:hover { color: var(--white); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lang-toggle {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--white);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 700;
+      transition: .2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn-sm { padding: 10px 16px; font-size: .94rem; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), #13a763);
+      color: #041123;
+      box-shadow: 0 10px 30px rgba(41, 209, 125, 0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--line);
+      color: var(--white);
+    }
+
+    .hero { padding: 86px 0 72px; }
+
+    .hero-grid {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4.3rem);
+      max-width: none;
+    }
+
+    .hero-text {
+      font-size: 1.08rem;
+      max-width: 60ch;
+      margin: 18px auto 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .hero-points li {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .info-box,
+    .step-card,
+    .cta-band-inner,
+    .sector-detail {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .mini-label {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .problem-grid,
+    .footer-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .problem-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .info-box {
+      padding: 28px;
+      border-radius: 24px;
+    }
+
+    .info-box h3 { margin-top: 0; }
+    .info-box.highlight { outline: 2px solid rgba(51, 182, 255, 0.28); }
+
+    .cards.four-up {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .step-card {
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .step-card span {
+      width: 42px;
+      height: 42px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .step-card h3 { margin: 0 0 10px; }
+    .step-card p { margin: 0; color: var(--muted); }
+
+    .cta-band-inner {
+      padding: 28px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .site-footer {
+      padding: 36px 0 44px;
+      border-top: 1px solid var(--line);
+      background: rgba(2, 5, 18, 0.52);
+    }
+
+    .footer-grid { grid-template-columns: 1.2fr 1fr; }
+    .site-footer h3, .site-footer h4 { margin-top: 0; }
+    .site-footer p, .site-footer a { color: var(--muted); }
+    .site-footer a:hover { color: var(--white); }
+
+    /* NUEVA SECCIÓN */
+    .sectors { position: relative; overflow: hidden; }
+    .sectors .section-heading { margin-bottom: 28px; }
+    .steps .section-heading { margin-bottom: 56px; }
+    .steps .section-heading h2 { margin-top: 12px; }
+
+    .sectors-shell {
+      position: relative;
+      border-radius: 30px;
+      padding: 18px 0 8px;
+    }
+
+    .sectors-shell::before,
+    .sectors-shell::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 70px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .sectors-shell::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(6,13,39,0.92), rgba(6,13,39,0));
+    }
+
+    .sectors-shell::after {
+      right: 0;
+      background: linear-gradient(270deg, rgba(6,13,39,0.92), rgba(6,13,39,0));
+    }
+
+    .sector-carousel {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 8px 6px 18px;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+
+    .sector-carousel::-webkit-scrollbar { display: none; }
+
+    .sector-card {
+      min-width: 190px;
+      max-width: 190px;
+      flex: 0 0 auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+      position: relative;
+      user-select: none;
+    }
+
+    .sector-card:hover,
+    .sector-card:focus-visible {
+      transform: translateY(-6px);
+      border-color: rgba(51,182,255,0.5);
+      box-shadow: 0 20px 50px rgba(10,20,55,0.55), 0 0 0 1px rgba(51,182,255,0.18);
+      outline: none;
+    }
+
+    .sector-card:hover .sector-card-body {
+      opacity: 1;
+    }
+
+    .sector-card .sector-hover-label {
+      display: none;
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 18px 10px 10px;
+      opacity: 0;
+      transition: opacity .2s ease;
+      pointer-events: none;
+    }
+
+    .sector-card:hover .sector-hover-label {
+      opacity: 1;
+    }
+
+    .sector-card.active {
+      border-color: rgba(143,76,255,0.65);
+      box-shadow: 0 22px 56px rgba(10,20,55,0.58), 0 0 0 1px rgba(143,76,255,0.22);
+    }
+
+    .sector-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: linear-gradient(135deg, rgba(51,182,255,.15), rgba(143,76,255,.18));
+    }
+
+    .sector-card-body {
+      padding: 14px 14px 16px;
+      text-align: center;
+    }
+
+    .sector-card-body h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .sector-detail {
+      margin-top: 26px;
+      border-radius: 30px;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .sector-detail.hidden {
+      display: none;
+    }
+
+    .sector-detail-copy h3 {
+      margin: 0 0 12px;
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+    }
+
+    .sector-detail-copy p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .sector-benefits {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .sector-benefits li,
+    .sector-results li {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 14px 16px;
+      color: var(--text);
+    }
+
+    .sector-detail-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .sector-side-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .sector-side-box h4 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      color: var(--blue);
+    }
+
+    .sector-results {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .sector-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    @media (max-width: 980px) {
+      nav { display: none; }
+      .hero-grid,
+      .cards.four-up,
+      .footer-grid,
+      .problem-grid,
+      .sector-detail {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-band-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .sectors-shell::before,
+      .sectors-shell::after {
+        width: 34px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding-top: 56px; }
+      .section { padding: 72px 0; }
+      .brand span { display: none; }
+      .nav { min-height: 68px; }
+      .hero h1 { max-width: none; }
+      .sector-card { min-width: 160px; max-width: 160px; }
+      .sector-detail { padding: 22px; }
+      .sector-actions { flex-direction: column; }
+      .sector-actions .btn { width: 100%; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="#inicio">
-        <img src="assets/logo.jpg" alt="RODAI logo">
+        <img src="assets/logo.jpg" alt="RODAI logo" />
         <span>RODAI</span>
       </a>
 
       <nav>
-        <a href="#servicios" data-i18n="navServices">Servicios</a>
+        <a href="#sectores" data-i18n="navSectors">Sectores</a>
         <a href="#como-funciona" data-i18n="navHow">Cómo funciona</a>
-        <a href="#brochures" data-i18n="navBrochures">Brochures</a>
         <a href="#contacto" data-i18n="navContact">Contacto</a>
       </nav>
 
       <div class="nav-actions">
         <button id="langToggle" class="lang-toggle" aria-label="Change language">EN</button>
-        <a class="btn btn-primary btn-sm" href="https://wa.me/50366814903" target="_blank" rel="noopener" data-i18n="navCTA">Solicitar demo</a>
+        <a class="btn btn-primary btn-sm" href="https://wa.me/50366814903?text=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20RODAI." target="_blank" rel="noopener" data-i18n="navCTA">Solicitar demo</a>
       </div>
     </div>
   </header>
@@ -36,32 +525,23 @@
     <section class="hero" id="inicio">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow" data-i18n="eyebrow">Automatización de ventas por WhatsApp con IA</p>
-          <h1 data-i18n="heroTitle">Convierte conversaciones en ventas automáticas para tu negocio.</h1>
-          <p class="hero-text" data-i18n="heroText">Implementamos sistemas que responden clientes, atienden 24/7 y generan oportunidades comerciales por WhatsApp usando inteligencia artificial.</p>
-
+          <h1>
+            <span style="display:block;">Atiende más,</span>
+            <span style="display:block;">agenda más,</span>
+            <span style="display:block;color:#29d17d;">factura más.</span>
+          </h1>
+          <p class="hero-text" data-i18n="heroText">No es lo mismo de siempre. LÍA aprende tu negocio, atiende a tus clientes, agenda citas y genera oportunidades — mientras tú te enfocas en crecer.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="https://wa.me/50366814903" target="_blank" rel="noopener" data-i18n="heroCTA1">Hablar por WhatsApp</a>
-            <a class="btn btn-secondary" href="#servicios" data-i18n="heroCTA2">Ver servicios</a>
+            <a class="btn btn-secondary" href="#sectores" data-i18n="heroCTA2">Ver para quién es</a>
           </div>
-
           <ul class="hero-points">
-            <li data-i18n="heroPoint1">Respuestas automáticas 24/7</li>
-            <li data-i18n="heroPoint2">Captura de leads</li>
-            <li data-i18n="heroPoint3">Implementación rápida</li>
+            <li data-i18n="heroPoint1">Atención automática 24/7</li>
+            <li data-i18n="heroPoint2">Agendamiento de citas</li>
+            <li data-i18n="heroPoint3">Generación de oportunidades</li>
           </ul>
         </div>
 
-        <div class="hero-card">
-          <img src="assets/logo.jpg" alt="RODAI hero logo">
-          <div class="hero-card-content">
-            <p class="mini-label" data-i18n="miniLabel">Canal principal</p>
-            <h3>WhatsApp</h3>
-            <p>+503 6681 4903</p>
-            <p>info@rodai.io</p>
-            <p>www.rodai.io</p>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -69,62 +549,87 @@
       <div class="container">
         <div class="section-heading center">
           <p class="eyebrow" data-i18n="problemEyebrow">El problema</p>
-          <h2 data-i18n="problemTitle">Muchas empresas pierden clientes por no responder a tiempo.</h2>
-          <p data-i18n="problemText">RODAI automatiza la atención y el seguimiento para que tu negocio no dependa de responder manualmente cada mensaje.</p>
+          <h2 data-i18n="problemTitle">Tu tiempo vale oro. ¿Cuánto vale tu cliente?</h2>
+          <p data-i18n="problemText">Ese cliente que no atendiste ya le compró a otro. LÍA atiende por ti en segundos — para que no pierdas ni uno.</p>
         </div>
 
         <div class="problem-grid">
           <div class="info-box">
-            <h3 data-i18n="problemBox1Title">Sin automatización</h3>
-            <p data-i18n="problemBox1Text">Mensajes sin responder, clientes fríos, procesos manuales y oportunidades perdidas.</p>
+            <h3 data-i18n="problemBox1Title">Sin LÍA</h3>
+            <p data-i18n="problemBox1Text">Soy la que despacha, la que atiende, la que se reúne con proveedores — hago todo. Pero mi factura no aumenta.</p>
           </div>
           <div class="info-box highlight">
-            <h3 data-i18n="problemBox2Title">Con RODAI</h3>
-            <p data-i18n="problemBox2Text">Atención inmediata, identificación de interesados, captura de datos y más ventas.</p>
+            <h3 data-i18n="problemBox2Title">Con LÍA</h3>
+            <p data-i18n="problemBox2Text">Mientras tú despachas y te reúnes, LÍA atiende, agenda y captura clientes. Tu factura empieza a crecer.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section services" id="servicios">
+    <section class="section sectors" id="sectores">
       <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow" data-i18n="servicesEyebrow">Servicios</p>
-          <h2 data-i18n="servicesTitle">Dos soluciones claras para vender mejor.</h2>
+        <div class="section-heading center">
+          <p class="eyebrow" data-i18n="sectorsEyebrow">Cómo ayuda LÍA</p>
+          <h2 data-i18n="sectorsTitle">¿Para quién es LÍA RODAI?</h2>
+          <p data-i18n="sectorsText">Elige tu tipo de negocio y descubre cómo LÍA puede ayudarte a atender clientes, agendar citas y generar oportunidades automáticamente.</p>
         </div>
 
-        <div class="cards two-up">
-          <article class="service-card">
-            <span class="badge">Lia Rodai</span>
-            <h3 data-i18n="liaTitle">Automatización de respuestas frecuentes</h3>
-            <p data-i18n="liaText">Ideal para negocios que quieren atender automáticamente a sus clientes y responder dudas frecuentes por WhatsApp.</p>
-            <ul>
-              <li data-i18n="liaItem1">Chatbot con inteligencia artificial</li>
-              <li data-i18n="liaItem2">Integración con WhatsApp</li>
-              <li data-i18n="liaItem3">Respuestas automáticas</li>
-              <li data-i18n="liaItem4">Entrenamiento inicial, monitoreo y mantenimiento</li>
-            </ul>
-            <div class="service-footer">
-              <strong data-i18n="liaCap">Capacidad: 200 conversaciones mensuales</strong>
-              <a href="#brochures" data-i18n="downloadBrochure">Descargar brochure</a>
-            </div>
-          </article>
+        <div class="sectors-shell">
+          <div class="sector-carousel" id="sectorCarousel">
+            <button class="sector-card" data-sector="doctor" type="button">
+              <img src="assets/doctor.webp" alt="Doctor" />
+              <div class="sector-card-body"><h3 data-i18n="sectorDoctor">Doctor/a</h3></div>
+            </button>
 
-          <article class="service-card featured">
-            <span class="badge">Elian Rodai</span>
-            <h3 data-i18n="elianTitle">Automatización + generación de oportunidades</h3>
-            <p data-i18n="elianText">Pensado para empresas que además de responder quieren identificar prospectos y convertir conversaciones en leads.</p>
-            <ul>
-              <li data-i18n="elianItem1">Todo lo incluido en Lia Rodai</li>
-              <li data-i18n="elianItem2">Identificación de clientes interesados</li>
-              <li data-i18n="elianItem3">Captura automática de datos</li>
-              <li data-i18n="elianItem4">Generación de leads para el negocio</li>
-            </ul>
-            <div class="service-footer">
-              <strong data-i18n="elianCap">Capacidad: 500 conversaciones mensuales</strong>
-              <a href="#brochures" data-i18n="downloadBrochure">Descargar brochure</a>
+            <button class="sector-card" data-sector="arquitecto" type="button">
+              <img src="assets/arquitecto.webp" alt="Arquitecto" />
+              <div class="sector-card-body"><h3 data-i18n="sectorArchitect">Arquitecto/a</h3></div>
+            </button>
+
+            <button class="sector-card" data-sector="comerciante" type="button">
+              <img src="assets/comerciante.webp" alt="Comerciante" />
+              <div class="sector-card-body"><h3 data-i18n="sectorMerchant">Comerciante</h3></div>
+            </button>
+
+            <button class="sector-card" data-sector="abogado" type="button">
+              <img src="assets/abogado.webp" alt="Abogado" />
+              <div class="sector-card-body"><h3 data-i18n="sectorLawyer">Abogado/a</h3></div>
+            </button>
+
+            <button class="sector-card" data-sector="clinica" type="button">
+              <img src="assets/clinica.webp" alt="Clínica" />
+              <div class="sector-card-body"><h3 data-i18n="sectorClinic">Clínica</h3></div>
+            </button>
+
+            <button class="sector-card" data-sector="taller" type="button">
+              <img src="assets/taller.webp" alt="Taller" />
+              <div class="sector-card-body"><h3 data-i18n="sectorWorkshop">Taller</h3></div>
+            </button>
+          </div>
+        </div>
+
+        <div class="sector-detail hidden" id="sectorDetail">
+          <div class="sector-detail-copy">
+            <h3 id="sectorTitle">LÍA para doctores y consultorios</h3>
+            <p id="sectorDescription">LÍA te ayuda a responder a tus pacientes al instante, organizar tus citas y evitar que pierdas consultas por no responder a tiempo.</p>
+            <ul class="sector-benefits" id="sectorBenefits"></ul>
+
+            <div class="sector-actions">
+              <a class="btn btn-primary" href="https://wa.me/50366814903" target="_blank" rel="noopener" data-i18n="whatsappCTA">Hablar por WhatsApp</a>
+              <a class="btn btn-secondary" href="https://wa.me/50366814903?text=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20L%C3%8DA%20RODAI%20para%20mi%20negocio." target="_blank" rel="noopener" data-i18n="demoCTA">Solicitar demo</a>
             </div>
-          </article>
+          </div>
+
+          <div class="sector-detail-side">
+            <div class="sector-side-box">
+              <h4 data-i18n="resultsTitle">Resultados que puedes esperar</h4>
+              <ul class="sector-results" id="sectorResults"></ul>
+            </div>
+            <div class="sector-side-box">
+              <h4 data-i18n="idealTitle">Ideal para</h4>
+              <p id="sectorIdeal">Consultorios, especialistas y profesionales que necesitan responder rápido y organizar mejor sus citas.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -133,89 +638,30 @@
       <div class="container">
         <div class="section-heading center">
           <p class="eyebrow" data-i18n="stepsEyebrow">Cómo funciona</p>
-          <h2 data-i18n="stepsTitle">Un sistema simple que trabaja por ti.</h2>
+          <h2 data-i18n="stepsTitle">Cómo LÍA mejora la imagen de tu negocio.</h2>
         </div>
 
         <div class="cards four-up">
           <div class="step-card">
             <span>1</span>
-            <h3 data-i18n="step1Title">Recibe mensajes</h3>
-            <p data-i18n="step1Text">Tus clientes escriben por WhatsApp en cualquier momento.</p>
+            <h3 data-i18n="step1Title">Respuesta inmediata</h3>
+            <p data-i18n="step1Text">Tu cliente escribe y recibe respuesta en segundos. No importa la hora.</p>
           </div>
           <div class="step-card">
             <span>2</span>
-            <h3 data-i18n="step2Title">Responde automáticamente</h3>
-            <p data-i18n="step2Text">La IA atiende preguntas frecuentes y guía la conversación.</p>
+            <h3 data-i18n="step2Title">Atención profesional</h3>
+            <p data-i18n="step2Text">LÍA guía la conversación, responde dudas y da información clara — como si tú mismo estuvieras respondiendo.</p>
           </div>
           <div class="step-card">
             <span>3</span>
-            <h3 data-i18n="step3Title">Captura datos</h3>
-            <p data-i18n="step3Text">El sistema detecta interés y guarda nombre, teléfono o correo.</p>
+            <h3 data-i18n="step3Title">Citas y pedidos organizados</h3>
+            <p data-i18n="step3Text">Sin llamadas de ida y vuelta. Todo queda registrado y confirmado.</p>
           </div>
           <div class="step-card">
             <span>4</span>
-            <h3 data-i18n="step4Title">Te entrega oportunidades</h3>
-            <p data-i18n="step4Text">Tu negocio recibe leads listos para seguimiento comercial.</p>
+            <h3 data-i18n="step4Title">Imagen de negocio grande</h3>
+            <p data-i18n="step4Text">Tu negocio responde rápido, organiza bien y nunca deja a un cliente sin atender. Eso se nota.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section brochures" id="brochures">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow" data-i18n="brochuresEyebrow">Material comercial</p>
-          <h2 data-i18n="brochuresTitle">Brochures listos en español e inglés.</h2>
-        </div>
-
-        <div class="cards brochures-grid">
-          <article class="brochure-card lang-es">
-            <img src="assets/Lia_Rodai_ES.png" alt="Brochure Lia Rodai en español">
-            <div>
-              <h3>Lia Rodai — ES</h3>
-              <p data-i18n="brochureLiaText">Automatización de preguntas frecuentes.</p>
-              <div class="downloads">
-                <a class="btn btn-secondary btn-sm" href="assets/Lia_Rodai_ES.pdf" download>PDF</a>
-                <a class="btn btn-secondary btn-sm" href="assets/Lia_Rodai_ES.png" download>PNG</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="brochure-card lang-es">
-            <img src="assets/Elian_Rodai_ES.png" alt="Brochure Elian Rodai en español">
-            <div>
-              <h3>Elian Rodai — ES</h3>
-              <p data-i18n="brochureElianText">Generación de leads y oportunidades.</p>
-              <div class="downloads">
-                <a class="btn btn-secondary btn-sm" href="assets/Elian_Rodai_ES.pdf" download>PDF</a>
-                <a class="btn btn-secondary btn-sm" href="assets/Elian_Rodai_ES.png" download>PNG</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="brochure-card lang-en">
-            <img src="assets/Lia_Rodai_EN.png" alt="Lia Rodai brochure in English">
-            <div>
-              <h3>Lia Rodai — EN</h3>
-              <p data-i18n="brochureLiaTextEn">Automated FAQ responses.</p>
-              <div class="downloads">
-                <a class="btn btn-secondary btn-sm" href="assets/Lia_Rodai_EN.pdf" download>PDF</a>
-                <a class="btn btn-secondary btn-sm" href="assets/Lia_Rodai_EN.png" download>PNG</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="brochure-card lang-en">
-            <img src="assets/Elian_Rodai_EN.png" alt="Elian Rodai brochure in English">
-            <div>
-              <h3>Elian Rodai — EN</h3>
-              <p data-i18n="brochureElianTextEn">Lead generation and sales opportunities.</p>
-              <div class="downloads">
-                <a class="btn btn-secondary btn-sm" href="assets/Elian_Rodai_EN.pdf" download>PDF</a>
-                <a class="btn btn-secondary btn-sm" href="assets/Elian_Rodai_EN.png" download>PNG</a>
-              </div>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -223,10 +669,10 @@
     <section class="section cta-band">
       <div class="container cta-band-inner">
         <div>
-          <p class="eyebrow" data-i18n="ctaEyebrow">Listo para publicar</p>
-          <h2 data-i18n="ctaTitle">Solicita una demo y empecemos a convertir mensajes en ventas.</h2>
+          <p class="eyebrow" data-i18n="ctaEyebrow">Listo para ver una demo</p>
+          <h2 data-i18n="ctaTitle">Solicita una demo y descubre cómo LÍA puede ayudarte en tu negocio.</h2>
         </div>
-        <a class="btn btn-primary" href="https://wa.me/50366814903" target="_blank" rel="noopener" data-i18n="ctaButton">Escribir por WhatsApp</a>
+        <a class="btn btn-primary" href="https://wa.me/50366814903?text=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20RODAI." target="_blank" rel="noopener" data-i18n="ctaButton">Solicitar demo</a>
       </div>
     </section>
   </main>
@@ -237,63 +683,490 @@
         <h3>RODAI</h3>
         <p data-i18n="footerText">Automatización de ventas por WhatsApp con inteligencia artificial.</p>
       </div>
-
       <div>
         <h4 data-i18n="footerContact">Contacto</h4>
-        <p><a href="https://wa.me/50366814903" target="_blank" rel="noopener">WhatsApp: +503 6681 4903</a></p>
-        <p><a href="mailto:info@rodai.io">info@rodai.io</a></p>
-        <p><a href="https://www.rodai.io" target="_blank" rel="noopener">www.rodai.io</a></p>
-      </div>
-
-      <div>
-        <h4 data-i18n="footerAssets">Archivos</h4>
-        <div class="footer-files lang-es">
-          <p><a href="assets/Lia_Rodai_ES.pdf" download>Lia Rodai ES</a></p>
-          <p><a href="assets/Elian_Rodai_ES.pdf" download>Elian Rodai ES</a></p>
-        </div>
-        <div class="footer-files lang-en">
-          <p><a href="assets/Lia_Rodai_EN.pdf" download>Lia Rodai EN</a></p>
-          <p><a href="assets/Elian_Rodai_EN.pdf" download>Elian Rodai EN</a></p>
+        <div style="display:flex;gap:16px;align-items:center;margin-top:8px;">
+          <a href="https://wa.me/50366814903" target="_blank" rel="noopener" title="WhatsApp" style="color:var(--muted);transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="mailto:info@rodai.io" title="Email" style="color:var(--muted);transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+          <a href="https://www.rodai.io" target="_blank" rel="noopener" title="Sitio web" style="color:var(--muted);transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </a>
         </div>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
-
-<!-- RODAI Chatbot Widget -->
-<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-<script type="module">
-  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-  createChat({
-    webhookUrl: 'https://n8n.95.216.212.187.sslip.io/webhook/b5c6d7e8-f9a0-4b1c-8d2e-3f4a5b6c7d8e/chat',
-    mode: 'window',
-    chatInputKey: 'chatInput',
-    chatSessionKey: 'sessionId',
-    defaultLanguage: 'es',
-    initialMessages: [
-      'Hola! Soy el asistente virtual de RODAI.',
-      'Puedo ayudarte a conocer nuestros planes Lia Rodai y Elian Rodai. Que deseas saber?'
-    ],
-    i18n: {
-      en: {
-        title: 'RODAI Assistant',
-        subtitle: 'Ask me about Lia Rodai and Elian Rodai',
-        footer: '',
-        getStarted: 'Start Chat',
-        inputPlaceholder: 'Type your message...',
-        closeButtonTooltip: 'Close'
-      },
-      es: {
-        title: 'Asistente RODAI',
-        subtitle: 'Preguntame sobre Lia Rodai y Elian Rodai',
-        footer: '',
-        getStarted: 'Iniciar chat',
-        inputPlaceholder: 'Escribe tu mensaje...',
-        closeButtonTooltip: 'Cerrar'
+  <!-- RODAI Chatbot Widget -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    createChat({
+      webhookUrl: 'https://n8n.95.216.212.187.sslip.io/webhook/b5c6d7e8-f9a0-4b1c-8d2e-3f4a5b6c7d8e/chat',
+      mode: 'window',
+      chatInputKey: 'chatInput',
+      chatSessionKey: 'sessionId',
+      defaultLanguage: 'es',
+      initialMessages: [
+        'Hola! Soy el asistente virtual de RODAI.',
+        'Puedo ayudarte a conocer nuestros planes Lia Rodai y Elian Rodai. Que deseas saber?'
+      ],
+      i18n: {
+        en: {
+          title: 'RODAI Assistant',
+          subtitle: 'Ask me about Lia Rodai and Elian Rodai',
+          footer: '',
+          getStarted: 'Start Chat',
+          inputPlaceholder: 'Type your message...',
+          closeButtonTooltip: 'Close'
+        },
+        es: {
+          title: 'Asistente RODAI',
+          subtitle: 'Preguntame sobre Lia Rodai y Elian Rodai',
+          footer: '',
+          getStarted: 'Iniciar chat',
+          inputPlaceholder: 'Escribe tu mensaje...',
+          closeButtonTooltip: 'Cerrar'
+        }
       }
+    });
+  </script>
+
+  <script>
+    const sectorData = {
+      doctor: {
+        es: {
+          title: "LÍA para doctores y consultorios",
+          description: "LÍA te ayuda a responder a tus pacientes al instante, organizar tus citas y evitar que pierdas consultas por no responder a tiempo.",
+          benefits: [
+            "Responde preguntas frecuentes sobre horarios, ubicación y servicios.",
+            "Registra citas automáticamente por WhatsApp.",
+            "Comparte indicaciones básicas antes de la consulta.",
+            "Mantiene atención 24/7 sin que tengas que estar pendiente.",
+            "Te ayuda a dar una experiencia más rápida y profesional."
+          ],
+          results: [
+            "Menos llamadas repetidas",
+            "Más citas organizadas",
+            "Pacientes mejor atendidos"
+          ],
+          ideal: "Consultorios, especialistas y profesionales que necesitan responder rápido y organizar mejor sus citas."
+        },
+        en: {
+          title: "LÍA for doctors and medical offices",
+          description: "LÍA helps you reply to patients instantly, organize appointments, and avoid losing consultations because of delayed responses.",
+          benefits: [
+            "Answers common questions about schedules, location, and services.",
+            "Registers appointments automatically through WhatsApp.",
+            "Shares basic pre-visit instructions.",
+            "Keeps your business responsive 24/7.",
+            "Helps deliver a faster, more professional experience."
+          ],
+          results: [
+            "Fewer repetitive calls",
+            "Better organized appointments",
+            "Better patient experience"
+          ],
+          ideal: "Medical offices and professionals who need fast replies and smoother appointment handling."
+        }
+      },
+      arquitecto: {
+        es: {
+          title: "LÍA para arquitectos",
+          description: "LÍA te ayuda a responder consultas iniciales, captar clientes interesados y organizar solicitudes de proyectos desde el primer contacto.",
+          benefits: [
+            "Responde dudas sobre tus servicios.",
+            "Capta nombre, teléfono y tipo de proyecto.",
+            "Filtra clientes realmente interesados.",
+            "Agenda reuniones iniciales.",
+            "Evita perder oportunidades por responder tarde."
+          ],
+          results: [
+            "Más prospectos organizados",
+            "Mejor primer contacto",
+            "Menos oportunidades perdidas"
+          ],
+          ideal: "Arquitectos y estudios que reciben consultas frecuentes y quieren ordenar mejor sus oportunidades."
+        },
+        en: {
+          title: "LÍA for architects",
+          description: "LÍA helps you handle first-time inquiries, capture interested prospects, and organize project requests from the first message.",
+          benefits: [
+            "Answers questions about your services.",
+            "Captures name, phone, and project type.",
+            "Filters serious prospects.",
+            "Schedules initial meetings.",
+            "Prevents lost opportunities caused by delayed replies."
+          ],
+          results: [
+            "More organized prospects",
+            "Better first touchpoint",
+            "Fewer missed opportunities"
+          ],
+          ideal: "Architects and studios that want a better way to manage incoming inquiries."
+        }
+      },
+      comerciante: {
+        es: {
+          title: "LÍA para comercios",
+          description: "LÍA te ayuda a atender clientes, responder dudas sobre productos y convertir más conversaciones en oportunidades de venta.",
+          benefits: [
+            "Responde preguntas sobre productos, horarios y ubicación.",
+            "Atiende clientes automáticamente incluso fuera de horario.",
+            "Ayuda a mantener una experiencia de compra más rápida.",
+            "Capta personas interesadas en tus productos.",
+            "Reduce la pérdida de ventas por no contestar a tiempo."
+          ],
+          results: [
+            "Más conversaciones atendidas",
+            "Más clientes satisfechos",
+            "Más oportunidades de venta"
+          ],
+          ideal: "Tiendas y comercios que reciben mensajes frecuentes y necesitan responder rápido para vender mejor."
+        },
+        en: {
+          title: "LÍA for retailers",
+          description: "LÍA helps you assist customers, answer product questions, and turn more chats into sales opportunities.",
+          benefits: [
+            "Answers questions about products, hours, and location.",
+            "Assists customers automatically even outside business hours.",
+            "Creates a faster shopping experience.",
+            "Captures interested shoppers.",
+            "Reduces lost sales caused by slow replies."
+          ],
+          results: [
+            "More conversations handled",
+            "Happier customers",
+            "More sales opportunities"
+          ],
+          ideal: "Shops and local businesses that need faster replies to sell more."
+        }
+      },
+      abogado: {
+        es: {
+          title: "LÍA para abogados y despachos",
+          description: "LÍA te ayuda a responder consultas iniciales, captar posibles clientes y agendar reuniones de una forma más rápida y profesional.",
+          benefits: [
+            "Responde preguntas frecuentes sobre tus servicios.",
+            "Capta datos de clientes potenciales.",
+            "Clasifica el tipo de consulta o caso.",
+            "Agenda reuniones iniciales.",
+            "Da una primera atención más ordenada y profesional."
+          ],
+          results: [
+            "Más contactos bien organizados",
+            "Mejor imagen profesional",
+            "Menos consultas perdidas"
+          ],
+          ideal: "Abogados y despachos que quieren atender mejor a nuevos clientes desde el primer mensaje."
+        },
+        en: {
+          title: "LÍA for lawyers and law firms",
+          description: "LÍA helps you handle first consultations, capture potential clients, and schedule meetings faster and more professionally.",
+          benefits: [
+            "Answers common questions about your services.",
+            "Captures potential client data.",
+            "Classifies the type of inquiry or case.",
+            "Schedules initial meetings.",
+            "Creates a more professional first response."
+          ],
+          results: [
+            "Better organized leads",
+            "Stronger professional image",
+            "Fewer missed inquiries"
+          ],
+          ideal: "Lawyers and firms that want to improve first response and intake."
+        }
+      },
+      clinica: {
+        es: {
+          title: "LÍA para clínicas",
+          description: "LÍA te ayuda a atender pacientes, registrar citas y mantener una experiencia más organizada desde el primer contacto.",
+          benefits: [
+            "Responde preguntas frecuentes de pacientes.",
+            "Registra citas por WhatsApp.",
+            "Comparte horarios, ubicación y servicios.",
+            "Ayuda a reducir tiempos de respuesta.",
+            "Mejora la atención desde el primer mensaje."
+          ],
+          results: [
+            "Pacientes mejor informados",
+            "Agenda más ordenada",
+            "Atención más consistente"
+          ],
+          ideal: "Clínicas que necesitan una atención más rápida y organizada para pacientes nuevos y recurrentes."
+        },
+        en: {
+          title: "LÍA for clinics",
+          description: "LÍA helps you assist patients, register appointments, and create a more organized experience from the very first message.",
+          benefits: [
+            "Answers common patient questions.",
+            "Registers appointments through WhatsApp.",
+            "Shares hours, location, and services.",
+            "Helps reduce response times.",
+            "Improves the first-contact experience."
+          ],
+          results: [
+            "Better informed patients",
+            "More organized schedule",
+            "More consistent support"
+          ],
+          ideal: "Clinics that need faster, more organized communication with patients."
+        }
+      },
+      taller: {
+        es: {
+          title: "LÍA para talleres",
+          description: "LÍA te ayuda a responder consultas, registrar servicios o citas y mantener informados a tus clientes de forma más rápida.",
+          benefits: [
+            "Responde preguntas sobre servicios y horarios.",
+            "Registra citas o revisiones por WhatsApp.",
+            "Comparte ubicación y disponibilidad.",
+            "Capta datos del cliente desde el primer contacto.",
+            "Evita perder oportunidades por no responder a tiempo."
+          ],
+          results: [
+            "Más consultas atendidas",
+            "Servicios mejor organizados",
+            "Clientes mejor informados"
+          ],
+          ideal: "Talleres y negocios de servicio que reciben consultas frecuentes y necesitan ordenarlas mejor."
+        },
+        en: {
+          title: "LÍA for workshops and service shops",
+          description: "LÍA helps you answer inquiries, register appointments or service requests, and keep customers informed more quickly.",
+          benefits: [
+            "Answers questions about services and hours.",
+            "Registers appointments or inspections through WhatsApp.",
+            "Shares location and availability.",
+            "Captures customer data from the first message.",
+            "Prevents lost opportunities caused by slow replies."
+          ],
+          results: [
+            "More inquiries handled",
+            "Better organized service flow",
+            "Better informed customers"
+          ],
+          ideal: "Service businesses that receive frequent inquiries and want a more organized intake process."
+        }
+      }
+    };
+
+    const translations = {
+      es: {
+        navSectors: "Sectores",
+        navHow: "Cómo funciona",
+        navContact: "Contacto",
+        navCTA: "Solicitar demo",
+        eyebrow: "Automatización de ventas por WhatsApp con IA",
+        heroTitle: "Atiende más, agenda más, factura más.",
+        heroText: "No es lo mismo de siempre. LÍA aprende tu negocio, atiende a tus clientes, agenda citas y genera oportunidades — mientras tú te enfocas en crecer.",
+        heroCTA1: "Hablar por WhatsApp",
+        heroCTA2: "Ver para quién es",
+        heroPoint1: "Atención automática 24/7",
+        heroPoint2: "Agendamiento de citas",
+        heroPoint3: "Generación de oportunidades",
+        miniLabel: "Canal principal",
+        problemEyebrow: "El problema",
+        problemTitle: "Tu tiempo vale oro. ¿Cuánto vale tu cliente?",
+        problemText: "Ese cliente que no atendiste ya le compró a otro. LÍA atiende por ti en segundos — para que no pierdas ni uno.",
+        problemBox1Title: "Sin LÍA",
+        problemBox1Text: "Soy la que despacha, la que atiende, la que se reúne con proveedores — hago todo. Pero mi factura no aumenta.",
+        problemBox2Title: "Con LÍA",
+        problemBox2Text: "Mientras tú despachas y te reúnes, LÍA atiende, agenda y captura clientes. Tu factura empieza a crecer.",
+        sectorsEyebrow: "Cómo ayuda LÍA",
+        sectorsTitle: "¿Para quién es LÍA RODAI?",
+        sectorsText: "Elige tu tipo de negocio y descubre cómo LÍA puede ayudarte a atender clientes, agendar citas y generar oportunidades automáticamente.",
+        sectorDoctor: "Doctor/a",
+        sectorArchitect: "Arquitecto/a",
+        sectorMerchant: "Comerciante",
+        sectorLawyer: "Abogado/a",
+        sectorClinic: "Clínica",
+        sectorWorkshop: "Taller",
+        resultsTitle: "Resultados que puedes esperar",
+        idealTitle: "Ideal para",
+        whatsappCTA: "Hablar por WhatsApp",
+        demoCTA: "Solicitar demo",
+        stepsEyebrow: "Cómo funciona",
+        stepsTitle: "Cómo LÍA mejora la imagen de tu negocio.",
+        step1Title: "Respuesta inmediata",
+        step1Text: "Tu cliente escribe y recibe respuesta en segundos. No importa la hora.",
+        step2Title: "Atención profesional",
+        step2Text: "LÍA guía la conversación, responde dudas y da información clara — como si tú mismo estuvieras respondiendo.",
+        step3Title: "Citas y pedidos organizados",
+        step3Text: "Sin llamadas de ida y vuelta. Todo queda registrado y confirmado.",
+        step4Title: "Imagen de negocio grande",
+        step4Text: "Tu negocio responde rápido, organiza bien y nunca deja a un cliente sin atender. Eso se nota.",
+        ctaEyebrow: "Listo para ver una demo",
+        ctaTitle: "Solicita una demo y descubre cómo LÍA puede ayudarte en tu negocio.",
+        ctaButton: "Solicitar demo",
+        footerText: "Tu negocio nunca duerme.",
+        footerContact: "Contacto"
+      },
+      en: {
+        navSectors: "Industries",
+        navHow: "How it works",
+        navContact: "Contact",
+        navCTA: "Request demo",
+        eyebrow: "AI-powered WhatsApp sales automation",
+        heroTitle: "Turn conversations into automatic sales for your business.",
+        heroText: "RODAI helps your business assist customers, schedule appointments, and generate opportunities through WhatsApp, even when you are unavailable.",
+        heroCTA1: "Chat on WhatsApp",
+        heroCTA2: "See who it is for",
+        heroPoint1: "24/7 automatic support",
+        heroPoint2: "Appointment scheduling",
+        heroPoint3: "Opportunity generation",
+        miniLabel: "Main channel",
+        problemEyebrow: "The problem",
+        problemTitle: "Many businesses lose customers because they do not reply on time.",
+        problemText: "RODAI automates customer attention and follow-up so your business does not depend on manually answering every message.",
+        problemBox1Title: "Without automation",
+        problemBox1Text: "Unanswered messages, cold prospects, manual processes, and lost opportunities.",
+        problemBox2Title: "With RODAI",
+        problemBox2Text: "Immediate attention, a better experience, more organized appointments, and more opportunities to sell.",
+        sectorsEyebrow: "How LÍA helps",
+        sectorsTitle: "Who is LÍA RODAI for?",
+        sectorsText: "Choose your type of business and discover how LÍA can help you assist customers, schedule appointments, and generate opportunities automatically.",
+        sectorDoctor: "Doctor",
+        sectorArchitect: "Architect",
+        sectorMerchant: "Retailer",
+        sectorLawyer: "Lawyer",
+        sectorClinic: "Clinic",
+        sectorWorkshop: "Workshop",
+        resultsTitle: "Results you can expect",
+        idealTitle: "Ideal for",
+        whatsappCTA: "Chat on WhatsApp",
+        demoCTA: "Request demo",
+        stepsEyebrow: "How it works",
+        stepsTitle: "A simple system that works for you.",
+        step1Title: "Receive messages",
+        step1Text: "Your customers write on WhatsApp anytime.",
+        step2Title: "Reply automatically",
+        step2Text: "LÍA answers questions, guides the conversation, and shares useful information.",
+        step3Title: "Capture interest or appointments",
+        step3Text: "The system can capture contact data, register appointments, or classify opportunities.",
+        step4Title: "Your business saves time",
+        step4Text: "You support customers better, lose fewer leads, and keep your business active even outside business hours.",
+        ctaEyebrow: "Ready for a demo",
+        ctaTitle: "Request a demo and discover how LÍA can help your business.",
+        ctaButton: "Request demo",
+        footerText: "LÍA works for your business, even when you can't.",
+        footerContact: "Contact"
+      }
+    };
+
+    let currentLang = "es";
+    let currentSector = null;
+    const sectorDetail = document.getElementById("sectorDetail");
+
+    const toggle = document.getElementById("langToggle");
+    const carousel = document.getElementById("sectorCarousel");
+    const cards = [...document.querySelectorAll(".sector-card")];
+    const titleEl = document.getElementById("sectorTitle");
+    const descriptionEl = document.getElementById("sectorDescription");
+    const benefitsEl = document.getElementById("sectorBenefits");
+    const resultsEl = document.getElementById("sectorResults");
+    const idealEl = document.getElementById("sectorIdeal");
+
+    function renderTexts(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.dataset.i18n;
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      toggle.textContent = lang === "es" ? "EN" : "ES";
+      document.querySelectorAll(".sector-hover-label").forEach(label => {
+        const key = label.closest("[data-sector]").dataset.sector;
+        label.textContent = sectorData[key][lang].title;
+      });
+      if (currentSector) renderSector(currentSector);
     }
-  });
-</script>
+
+    function renderSector(key) {
+      currentSector = key;
+      sectorDetail.classList.remove("hidden");
+      const data = sectorData[key][currentLang];
+
+      titleEl.textContent = data.title;
+      descriptionEl.textContent = data.description;
+      idealEl.textContent = data.ideal;
+
+      benefitsEl.innerHTML = "";
+      data.benefits.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        benefitsEl.appendChild(li);
+      });
+
+      resultsEl.innerHTML = "";
+      data.results.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        resultsEl.appendChild(li);
+      });
+
+      cards.forEach(card => {
+        card.classList.toggle("active", card.dataset.sector === key);
+      });
+    }
+
+    cards.forEach(card => {
+      const key = card.dataset.sector;
+      // Hover label — shows just the LÍA title on mouseenter
+      const label = document.createElement("span");
+      label.className = "sector-hover-label";
+      label.textContent = sectorData[key][currentLang].title;
+      card.appendChild(label);
+
+      card.addEventListener("click", () => renderSector(key));
+    });
+
+    toggle.addEventListener("click", () => {
+      currentLang = currentLang === "es" ? "en" : "es";
+      renderTexts(currentLang);
+    });
+
+    // Mejora PRO del carrusel: movimiento automático al pasar cursor, con rebote suave.
+    let hoverScrolling = false;
+    let direction = 1;
+    let rafId = null;
+
+    function tickCarousel() {
+      if (!hoverScrolling || window.innerWidth <= 980) {
+        rafId = requestAnimationFrame(tickCarousel);
+        return;
+      }
+
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      if (maxScroll > 0) {
+        carousel.scrollLeft += 0.7 * direction;
+
+        if (carousel.scrollLeft >= maxScroll - 2) direction = -1;
+        if (carousel.scrollLeft <= 2) direction = 1;
+      }
+
+      rafId = requestAnimationFrame(tickCarousel);
+    }
+
+    carousel.addEventListener("mouseenter", () => {
+      hoverScrolling = true;
+    });
+
+    carousel.addEventListener("mouseleave", () => {
+      hoverScrolling = false;
+    });
+
+    carousel.addEventListener("touchstart", () => {
+      hoverScrolling = false;
+    }, { passive: true });
+
+    renderTexts(currentLang);
+    rafId = requestAnimationFrame(tickCarousel);
+  </script>
 </body>
 </html>
