@@ -17,7 +17,13 @@ const nav = [
   )},
 ]
 
-export default function Sidebar() {
+const adminNav = [
+  { href: '/admin/tenants', label: 'Clientes', icon: (
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+  )},
+]
+
+export default function Sidebar({ isAdmin = false }: { isAdmin?: boolean }) {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -59,6 +65,30 @@ export default function Sidebar() {
             {item.label}
           </Link>
         ))}
+
+        {isAdmin && (
+          <>
+            <div className="pt-4 pb-1 px-4">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Admin</p>
+            </div>
+            {adminNav.map(item => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition ${
+                  pathname.startsWith(item.href)
+                    ? 'bg-blue-600 text-white'
+                    : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                }`}
+              >
+                <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {item.icon}
+                </svg>
+                {item.label}
+              </Link>
+            ))}
+          </>
+        )}
       </nav>
 
       <div className="p-4 border-t border-slate-700">

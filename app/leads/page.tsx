@@ -30,7 +30,7 @@ export default async function LeadsPage({
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
+      <Sidebar isAdmin={session.tenantSlug === 'rodai' && session.rol === 'owner'} />
       <main className="flex-1 p-8 overflow-auto">
         <div className="mb-8 flex items-center justify-between">
           <div>
