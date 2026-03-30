@@ -32,6 +32,8 @@ export default function LeadsTable({
   const [propuestaError, setPropuestaError] = useState<string | null>(null)
   const [propuestaModal, setPropuestaModal] = useState<{ lead: Lead; telefono: string } | null>(null)
   const [productos, setProductos] = useState<Producto[]>([])
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -111,6 +113,19 @@ export default function LeadsTable({
     setEditId(null)
     setSaveError('')
     router.refresh()
+  }
+
+  async function deleteLead(id: string) {
+    setDeletingId(id)
+    try {
+      const res = await fetch(`/api/leads/${id}`, { method: 'DELETE' })
+      if (res.ok) {
+        setConfirmDeleteId(null)
+        router.refresh()
+      }
+    } finally {
+      setDeletingId(null)
+    }
   }
 
   async function generarPropuesta(lead: Lead, telefono: string) {
@@ -535,6 +550,30 @@ export default function LeadsTable({
                           >
                             Abrir propuesta →
                           </a>
+                        )}
+                        {confirmDeleteId === lead.id ? (
+                          <div className="flex gap-1">
+                            <button
+                              onClick={() => deleteLead(lead.id)}
+                              disabled={deletingId === lead.id}
+                              className="px-2 py-1.5 bg-red-600 text-white rounded-lg text-xs hover:bg-red-700 disabled:opacity-60 transition"
+                            >
+                              {deletingId === lead.id ? '...' : '¿Eliminar?'}
+                            </button>
+                            <button
+                              onClick={() => setConfirmDeleteId(null)}
+                              className="px-2 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs hover:bg-gray-200 transition"
+                            >
+                              No
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => setConfirmDeleteId(lead.id)}
+                            className="px-3 py-1.5 bg-red-50 text-red-500 rounded-lg text-xs hover:bg-red-100 transition"
+                          >
+                            🗑️ Eliminar
+                          </button>
                         )}
                       </div>
                     )}
