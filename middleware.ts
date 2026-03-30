@@ -46,10 +46,14 @@ export async function middleware(req: NextRequest) {
   const session = await verifySession(token)
   if (!session) return NextResponse.redirect(new URL('/', req.url))
 
-  // Verificar que el tenant del session coincide con el subdominio
-  const sessionTenant = (session as { tenantSlug?: string }).tenantSlug ?? 'rodai'
-  if (sessionTenant !== tenantSlug) {
-    return NextResponse.redirect(new URL('/', req.url))
+  // Solo verificar subdominio si el host es *.app.rodai.io
+  const host = req.headers.get('host') ?? ''
+  const isSubdomainRouting = host.endsWith('.app.rodai.io')
+  if (isSubdomainRouting) {
+    const sessionTenant = (session as { tenantSlug?: string }).tenantSlug ?? 'rodai'
+    if (sessionTenant !== tenantSlug) {
+      return NextResponse.redirect(new URL('/', req.url))
+    }
   }
 
   const res = NextResponse.next()
