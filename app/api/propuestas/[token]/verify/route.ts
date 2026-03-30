@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase-admin'
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ token: string }> }) {
   const { token } = await params
-  const sb = getSupabase()
+  const sb = getSupabaseAdmin()
   if (!sb) return NextResponse.json({ error: 'Supabase not configured' }, { status: 503 })
 
   const { telefono } = await req.json()

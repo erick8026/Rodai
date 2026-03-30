@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabase } from '@/lib/supabase'
+import { getSupabase } from '@/lib/supabase-admin'
 import { getSession } from '@/lib/auth'
 import { randomBytes } from 'crypto'
 
@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   const session = await getSession()
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
-  const sb = getSupabase()
+  const sb = getSupabaseAdmin()
   if (!sb) return NextResponse.json({ error: 'Supabase not configured' }, { status: 503 })
 
   const body = await req.json()
