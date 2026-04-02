@@ -664,6 +664,21 @@
               <img src="assets/taller.webp" alt="Chatbot WhatsApp para talleres automotrices" />
               <div class="sector-card-body"><h3 data-i18n="sectorWorkshop">Taller</h3></div>
             </a>
+
+            <a class="sector-card" data-sector="inmobiliaria" href="/para-inmobiliarias" role="button">
+              <img src="assets/inmobiliaria.webp" alt="Chatbot WhatsApp para inmobiliarias y agentes de bienes raíces" />
+              <div class="sector-card-body"><h3 data-i18n="sectorRealEstate">Inmobiliaria</h3></div>
+            </a>
+
+            <a class="sector-card" data-sector="estetica" href="/para-estetica" role="button">
+              <img src="assets/estetica.webp" alt="Chatbot WhatsApp para estéticas y salones de belleza" />
+              <div class="sector-card-body"><h3 data-i18n="sectorBeauty">Estética</h3></div>
+            </a>
+
+            <a class="sector-card" data-sector="hotel" href="/para-hoteles" role="button">
+              <img src="assets/hotel.webp" alt="Chatbot WhatsApp para hoteles y hospedajes" />
+              <div class="sector-card-body"><h3 data-i18n="sectorHotel">Hotel</h3></div>
+            </a>
           </div>
         </div>
 
@@ -1022,6 +1037,114 @@
           ],
           ideal: "Service businesses that receive frequent inquiries and want a more organized intake process."
         }
+      },
+      inmobiliaria: {
+        es: {
+          title: "LÍA para inmobiliarias",
+          description: "LÍA califica prospectos, agenda visitas a propiedades y da seguimiento a leads automáticamente por WhatsApp.",
+          benefits: [
+            "Capta nombre, presupuesto y tipo de propiedad que busca el cliente.",
+            "Agenda visitas y envía recordatorios automáticos.",
+            "Filtra prospectos serios antes de que lleguen al agente.",
+            "Responde preguntas sobre propiedades disponibles.",
+            "Mantiene atención 24/7 sin perder oportunidades."
+          ],
+          results: [
+            "Más prospectos calificados",
+            "Menos visitas perdidas",
+            "Agentes más productivos"
+          ],
+          ideal: "Inmobiliarias y agentes de bienes raíces que reciben muchas consultas y quieren calificarlas mejor antes de atenderlas."
+        },
+        en: {
+          title: "LÍA for real estate",
+          description: "LÍA qualifies leads, schedules property visits, and follows up with prospects automatically through WhatsApp.",
+          benefits: [
+            "Captures name, budget, and property type from day one.",
+            "Schedules visits and sends automatic reminders.",
+            "Filters serious leads before they reach the agent.",
+            "Answers questions about available properties.",
+            "Keeps attention 24/7 without missing opportunities."
+          ],
+          results: [
+            "More qualified leads",
+            "Fewer missed visits",
+            "More productive agents"
+          ],
+          ideal: "Real estate agencies and agents who receive high volumes of inquiries and want to qualify them faster."
+        }
+      },
+      estetica: {
+        es: {
+          title: "LÍA para estéticas",
+          description: "LÍA agenda citas de belleza, confirma disponibilidad y captura clientes nuevos por WhatsApp automáticamente.",
+          benefits: [
+            "Agenda citas con día, hora y servicio solicitado.",
+            "Envía confirmaciones y recordatorios automáticos.",
+            "Responde preguntas sobre servicios y precios.",
+            "Capta clientes nuevos fuera del horario de atención.",
+            "Reduce ausencias con recordatorios previos a la cita."
+          ],
+          results: [
+            "Agenda más llena",
+            "Menos ausencias",
+            "Más clientes nuevos"
+          ],
+          ideal: "Estéticas, salones de belleza y spas que quieren organizar mejor su agenda sin contestar mensajes manualmente."
+        },
+        en: {
+          title: "LÍA for beauty salons",
+          description: "LÍA books beauty appointments, confirms availability, and captures new clients through WhatsApp automatically.",
+          benefits: [
+            "Books appointments with date, time, and service.",
+            "Sends automatic confirmations and reminders.",
+            "Answers questions about services and pricing.",
+            "Captures new clients outside business hours.",
+            "Reduces no-shows with pre-appointment reminders."
+          ],
+          results: [
+            "Fuller appointment book",
+            "Fewer no-shows",
+            "More new clients"
+          ],
+          ideal: "Beauty salons and spas that want a better way to manage bookings without manually answering every message."
+        }
+      },
+      hotel: {
+        es: {
+          title: "LÍA para hoteles",
+          description: "LÍA atiende huéspedes 24/7, gestiona consultas de reservas y responde preguntas frecuentes por WhatsApp automáticamente.",
+          benefits: [
+            "Responde consultas de disponibilidad y tarifas.",
+            "Captura datos para reservas y los envía al equipo.",
+            "Atiende solicitudes de huéspedes durante su estadía.",
+            "Comparte información del hotel, amenidades y check-in.",
+            "Mantiene atención profesional las 24 horas."
+          ],
+          results: [
+            "Huéspedes mejor atendidos",
+            "Más consultas convertidas",
+            "Equipo enfocado en lo importante"
+          ],
+          ideal: "Hoteles, hostales y hospedajes que reciben consultas frecuentes y quieren mejorar la experiencia del huésped desde antes de llegar."
+        },
+        en: {
+          title: "LÍA for hotels",
+          description: "LÍA assists guests 24/7, handles reservation inquiries, and answers frequently asked questions through WhatsApp automatically.",
+          benefits: [
+            "Answers availability and rate inquiries.",
+            "Captures booking details and forwards them to the team.",
+            "Attends to guest requests during their stay.",
+            "Shares hotel info, amenities, and check-in details.",
+            "Maintains professional service around the clock."
+          ],
+          results: [
+            "Better guest experience",
+            "More inquiries converted",
+            "Team focused on high-value tasks"
+          ],
+          ideal: "Hotels, hostels, and accommodations that want to improve guest communication before and during their stay."
+        }
       }
     };
 
@@ -1057,6 +1180,9 @@
         sectorLawyer: "Abogado/a",
         sectorClinic: "Clínica",
         sectorWorkshop: "Taller",
+        sectorRealEstate: "Inmobiliaria",
+        sectorBeauty: "Estética",
+        sectorHotel: "Hotel",
         resultsTitle: "Resultados que puedes esperar",
         idealTitle: "Ideal para",
         whatsappCTA: "Hablar por WhatsApp",
@@ -1110,6 +1236,9 @@
         sectorLawyer: "Lawyer",
         sectorClinic: "Clinic",
         sectorWorkshop: "Workshop",
+        sectorRealEstate: "Real Estate",
+        sectorBeauty: "Beauty Salon",
+        sectorHotel: "Hotel",
         resultsTitle: "Results you can expect",
         idealTitle: "Ideal for",
         whatsappCTA: "Chat on WhatsApp",
@@ -1136,7 +1265,10 @@
 
     const sectorLandings = {
       clinica: "/para-clinicas",
-      taller: "/para-automotriz"
+      taller: "/para-automotriz",
+      inmobiliaria: "/para-inmobiliarias",
+      estetica: "/para-estetica",
+      hotel: "/para-hoteles"
     };
 
     let currentLang = "es";
