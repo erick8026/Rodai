@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot IA para WhatsApp | Hoteles y Hospedajes — RODAI</title>
+  <meta name="description" content="LÍA de RODAI atiende consultas de reservas, disponibilidad y servicios del hotel por WhatsApp las 24 horas. Solicita tu demo gratis.">
+  <link rel="canonical" href="https://rodai.io/para-hoteles">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rodai.io/para-hoteles">
+  <meta property="og:title" content="Chatbot WhatsApp para Hoteles — RODAI">
+  <meta property="og:description" content="LÍA de RODAI atiende consultas de reservas, disponibilidad y servicios del hotel por WhatsApp las 24 horas. Solicita tu demo gratis.">
+  <meta property="og:image" content="https://rodai.io/assets/og-image.png">
+  <meta property="og:locale" content="es_LA">
+  <meta property="og:site_name" content="RODAI">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chatbot WhatsApp para Hoteles — RODAI">
+  <meta name="twitter:description" content="LÍA de RODAI atiende consultas de reservas, disponibilidad y servicios del hotel por WhatsApp las 24 horas. Solicita tu demo gratis.">
+  <meta name="twitter:image" content="https://rodai.io/assets/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text: #ecf2ff;
+      --muted: #b9c6ee;
+      --line: rgba(255,255,255,0.14);
+      --blue: #33b6ff;
+      --purple: #8f4cff;
+      --green: #29d17d;
+      --shadow: 0 18px 60px rgba(3,8,30,0.45);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top right, rgba(143,76,255,0.25), transparent 28%),
+                  radial-gradient(circle at top left, rgba(51,182,255,0.18), transparent 24%),
+                  linear-gradient(180deg, #060d27 0%, #081338 40%, #060d27 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(5,10,26,0.7);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo-link span {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--text); }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #29d17d, #13a763);
+      color: #041123;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 10px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .hero {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 80px 24px 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-copy { order: 1; }
+    .hero-image { order: 2; }
+
+    .sector-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(51,182,255,0.12);
+      border: 1px solid rgba(51,182,255,0.25);
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 10px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-image .img-placeholder {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(143,76,255,0.2), rgba(51,182,255,0.15));
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    .hero-image img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      display: block;
+    }
+
+    section { padding: 80px 24px; }
+
+    .section-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(143,76,255,0.12);
+      border: 1px solid rgba(143,76,255,0.25);
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 48px;
+      color: var(--text);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .benefit-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 24px;
+      padding: 28px;
+    }
+
+    .benefit-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(41,209,125,0.2), rgba(19,167,99,0.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+
+    .benefit-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .benefit-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .problems-section {
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .problems-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .problem-item {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 20px;
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .problem-side, .solution-side {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .problem-emoji, .solution-emoji {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .problem-text {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .solution-text {
+      font-size: 0.92rem;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .cta-band {
+      background: linear-gradient(135deg, rgba(143,76,255,0.15), rgba(51,182,255,0.1));
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cta-band-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-band h2 {
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .cta-band p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 32px;
+    }
+
+    .cta-band .btn-primary {
+      font-size: 1rem;
+      padding: 14px 28px;
+      border-radius: 14px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 40px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .footer-logo span {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 48px 20px 56px;
+      }
+
+      .hero-copy { order: 2; }
+      .hero-image { order: 1; }
+
+      .hero-image .img-placeholder,
+      .hero-image img {
+        max-width: 360px;
+        margin: 0 auto;
+      }
+
+      .benefits-grid { grid-template-columns: 1fr; }
+
+      .problem-item {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      nav { display: none; }
+
+      .header-inner { gap: 12px; }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a class="logo-link" href="/">
+        <img src="assets/logo.jpg" alt="RODAI" style="width:48px;height:48px;border-radius:14px;object-fit:cover;">
+        <span>RODAI</span>
+      </a>
+      <nav>
+        <a href="/">Sectores</a>
+        <a href="/#como-funciona">Cómo funciona</a>
+        <a href="/precios">Planes</a>
+      </nav>
+      <a class="btn-primary" href="https://wa.me/50366814903?text=Hola%2C%20quiero%20una%20demo%20para%20hoteles" target="_blank" rel="noopener">
+        💬 Hablar por WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="sector-tag">Hoteles y Hospedajes</div>
+      <h1>LÍA atiende a tus huéspedes antes, durante y después de su estadía</h1>
+      <p class="hero-desc">Tu asistente de IA en WhatsApp que responde consultas de reservas, gestiona solicitudes de huéspedes y genera upsells — las 24 horas del día.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="https://wa.me/50366814903?text=Hola%2C%20quiero%20una%20demo%20para%20hoteles" target="_blank" rel="noopener">
+          💬 Solicitar demo gratis
+        </a>
+        <a class="btn-secondary" href="/#como-funciona">Ver cómo funciona</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="assets/hotel.webp" alt="Hotel usando chatbot LÍA RODAI para WhatsApp" style="width:100%;border-radius:24px;object-fit:cover;">
+    </div>
+  </div>
+
+  <section>
+    <div class="section-inner">
+      <div class="section-tag">Funcionalidades</div>
+      <h2 class="section-title">¿Qué hace LÍA por tu hotel?</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">🔍</div>
+          <div class="benefit-title">Responde consultas de disponibilidad y tarifas al instante</div>
+          <p class="benefit-desc">LÍA informa disponibilidad de habitaciones, precios por fecha y categorías de cuartos sin que la recepción tenga que intervenir.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🛎️</div>
+          <div class="benefit-title">Gestiona check-in, check-out y solicitudes de servicio</div>
+          <p class="benefit-desc">Los huéspedes pueden hacer solicitudes de habitación, room service o cambio de cuarto directamente por WhatsApp en cualquier momento.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">⬆️</div>
+          <div class="benefit-title">Recomienda servicios y genera upsells automáticos</div>
+          <p class="benefit-desc">LÍA ofrece upgrades de habitación, spa, tours y paquetes adicionales en el momento justo para aumentar el ticket promedio.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">💬</div>
+          <div class="benefit-title">Atiende quejas y solicitudes en tiempo real</div>
+          <p class="benefit-desc">Ninguna queja o solicitud queda sin respuesta — LÍA recibe el mensaje y activa al equipo correspondiente de inmediato.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="problems-section">
+    <div class="section-inner">
+      <div class="section-tag">Problemas resueltos</div>
+      <h2 class="section-title">Problemas que LÍA resuelve en tu hotel</h2>
+      <div class="problems-list">
+        <div class="problem-item">
+          <div class="problem-side">
+            <span class="problem-emoji">❌</span>
+            <span class="problem-text">Consultas de reservas a las 2am sin nadie que responda y el huésped se va con la competencia</span>
+          </div>
+          <div class="solution-side">
+            <span class="solution-emoji">✅</span>
+            <span class="solution-text">LÍA atiende 24/7, nunca pierde una consulta de reserva sin importar la hora</span>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-side">
+            <span class="problem-emoji">❌</span>
+            <span class="problem-text">Recepción saturada respondiendo las mismas preguntas sobre precios, horarios y servicios</span>
+          </div>
+          <div class="solution-side">
+            <span class="solution-emoji">✅</span>
+            <span class="solution-text">LÍA resuelve el 80% de preguntas frecuentes sin necesitar intervención humana</span>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-side">
+            <span class="problem-emoji">❌</span>
+            <span class="problem-text">Huéspedes insatisfechos que se van sin comunicar sus problemas y dejan mala reseña</span>
+          </div>
+          <div class="solution-side">
+            <span class="solution-emoji">✅</span>
+            <span class="solution-text">LÍA mantiene contacto continuo con el huésped durante toda su estadía para detectar problemas a tiempo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="cta-band-inner">
+      <h2>¿Listo para automatizar tu hotel?</h2>
+      <p>Solicita tu demo gratis y ve cómo LÍA puede mejorar la experiencia de tus huéspedes desde el primer mensaje.</p>
+      <a class="btn-primary" href="https://wa.me/50366814903?text=Hola%2C%20quiero%20una%20demo%20para%20hoteles" target="_blank" rel="noopener">
+        💬 Solicitar demo gratis por WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <a class="footer-logo" href="/">
+        <img src="assets/logo.jpg" alt="RODAI" style="width:36px;height:36px;border-radius:10px;object-fit:cover;">
+        <span>RODAI</span>
+      </a>
+      <p class="footer-copy">© 2026 RODAI. Todos los derechos reservados.</p>
+      <div class="footer-links">
+        <a href="/">Inicio</a>
+        <a href="/precios">Planes</a>
+        <a href="https://wa.me/50366814903" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
