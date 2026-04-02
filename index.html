@@ -585,9 +585,9 @@
       <div class="container hero-grid">
         <div class="hero-copy">
           <h1>
-            <span style="display:block;">Atiende más,</span>
-            <span style="display:block;">agenda más,</span>
-            <span style="display:block;color:#29d17d;">factura más.</span>
+            <span style="display:block;">Chatbot IA para WhatsApp</span>
+            <span style="display:block;">que atiende, agenda</span>
+            <span style="display:block;color:#29d17d;">y factura por ti.</span>
           </h1>
           <p class="hero-text" data-i18n="heroText">No es lo mismo de siempre. LÍA aprende tu negocio, atiende a tus clientes, agenda citas y genera oportunidades — mientras tú te enfocas en crecer.</p>
           <div class="hero-actions">
@@ -636,32 +636,32 @@
         <div class="sectors-shell">
           <div class="sector-carousel" id="sectorCarousel">
             <button class="sector-card" data-sector="doctor" type="button">
-              <img src="assets/doctor.webp" alt="Doctor" />
+              <img src="assets/doctor.webp" alt="Chatbot IA para WhatsApp en consultorios médicos" />
               <div class="sector-card-body"><h3 data-i18n="sectorDoctor">Doctor/a</h3></div>
             </button>
 
             <button class="sector-card" data-sector="arquitecto" type="button">
-              <img src="assets/arquitecto.webp" alt="Arquitecto" />
+              <img src="assets/arquitecto.webp" alt="Automatización WhatsApp para arquitectos y estudios" />
               <div class="sector-card-body"><h3 data-i18n="sectorArchitect">Arquitecto/a</h3></div>
             </button>
 
             <button class="sector-card" data-sector="comerciante" type="button">
-              <img src="assets/comerciante.webp" alt="Comerciante" />
+              <img src="assets/comerciante.webp" alt="Chatbot IA para comerciantes y tiendas LATAM" />
               <div class="sector-card-body"><h3 data-i18n="sectorMerchant">Comerciante</h3></div>
             </button>
 
             <button class="sector-card" data-sector="abogado" type="button">
-              <img src="assets/abogado.webp" alt="Abogado" />
+              <img src="assets/abogado.webp" alt="Automatización WhatsApp para despachos de abogados" />
               <div class="sector-card-body"><h3 data-i18n="sectorLawyer">Abogado/a</h3></div>
             </button>
 
             <button class="sector-card" data-sector="clinica" type="button">
-              <img src="assets/clinica.webp" alt="Clínica" />
+              <img src="assets/clinica.webp" alt="LÍA RODAI chatbot WhatsApp para clínicas y salud" />
               <div class="sector-card-body"><h3 data-i18n="sectorClinic">Clínica</h3></div>
             </button>
 
             <button class="sector-card" data-sector="taller" type="button">
-              <img src="assets/taller.webp" alt="Taller" />
+              <img src="assets/taller.webp" alt="Chatbot WhatsApp para talleres automotrices" />
               <div class="sector-card-body"><h3 data-i18n="sectorWorkshop">Taller</h3></div>
             </button>
           </div>
@@ -676,6 +676,7 @@
             <div class="sector-actions">
               <a class="btn btn-primary" href="https://wa.me/50366814903" target="_blank" rel="noopener" data-i18n="whatsappCTA">Hablar por WhatsApp</a>
               <a class="btn btn-secondary" href="https://wa.me/50366814903?text=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20L%C3%8DA%20RODAI%20para%20mi%20negocio." target="_blank" rel="noopener" data-i18n="demoCTA">Solicitar demo</a>
+              <a class="btn btn-secondary" id="sectorLandingLink" href="#" style="display:none;" data-i18n="sectorLandingCTA">Ver página completa</a>
             </div>
           </div>
 
@@ -1050,6 +1051,7 @@
         idealTitle: "Ideal para",
         whatsappCTA: "Hablar por WhatsApp",
         demoCTA: "Solicitar demo",
+        sectorLandingCTA: "Ver página completa",
         stepsEyebrow: "Cómo funciona",
         stepsTitle: "Cómo LÍA mejora la imagen de tu negocio.",
         step1Title: "Respuesta inmediata",
@@ -1101,6 +1103,7 @@
         idealTitle: "Ideal for",
         whatsappCTA: "Chat on WhatsApp",
         demoCTA: "Request demo",
+        sectorLandingCTA: "See full page",
         stepsEyebrow: "How it works",
         stepsTitle: "A simple system that works for you.",
         step1Title: "Receive messages",
@@ -1119,9 +1122,15 @@
       }
     };
 
+    const sectorLandings = {
+      clinica: "/para-clinicas",
+      taller: "/para-automotriz"
+    };
+
     let currentLang = "es";
     let currentSector = null;
     const sectorDetail = document.getElementById("sectorDetail");
+    const sectorLandingLink = document.getElementById("sectorLandingLink");
 
     const toggle = document.getElementById("langToggle");
     const carousel = document.getElementById("sectorCarousel");
@@ -1174,6 +1183,13 @@
       cards.forEach(card => {
         card.classList.toggle("active", card.dataset.sector === key);
       });
+
+      if (sectorLandings[key]) {
+        sectorLandingLink.href = sectorLandings[key];
+        sectorLandingLink.style.display = "";
+      } else {
+        sectorLandingLink.style.display = "none";
+      }
     }
 
     cards.forEach(card => {
