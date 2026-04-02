@@ -661,23 +661,28 @@
             </a>
 
             <a class="sector-card" data-sector="taller" href="/para-automotriz" role="button">
-              <img src="assets/taller.webp" alt="Chatbot WhatsApp para talleres automotrices" />
+              <img src="assets/taller.png" alt="Chatbot WhatsApp para talleres automotrices" />
               <div class="sector-card-body"><h3 data-i18n="sectorWorkshop">Taller</h3></div>
             </a>
 
             <a class="sector-card" data-sector="inmobiliaria" href="/para-inmobiliarias" role="button">
-              <img src="assets/inmobiliaria.webp" alt="Chatbot WhatsApp para inmobiliarias y agentes de bienes raíces" />
+              <img src="assets/inmobiliaria.png" alt="Chatbot WhatsApp para inmobiliarias y agentes de bienes raíces" />
               <div class="sector-card-body"><h3 data-i18n="sectorRealEstate">Inmobiliaria</h3></div>
             </a>
 
             <a class="sector-card" data-sector="estetica" href="/para-estetica" role="button">
-              <img src="assets/estetica.webp" alt="Chatbot WhatsApp para estéticas y salones de belleza" />
+              <img src="assets/estetica.png" alt="Chatbot WhatsApp para estéticas y salones de belleza" />
               <div class="sector-card-body"><h3 data-i18n="sectorBeauty">Estética</h3></div>
             </a>
 
             <a class="sector-card" data-sector="hotel" href="/para-hoteles" role="button">
-              <img src="assets/hotel.webp" alt="Chatbot WhatsApp para hoteles y hospedajes" />
+              <img src="assets/hotel.png" alt="Chatbot WhatsApp para hoteles y hospedajes" />
               <div class="sector-card-body"><h3 data-i18n="sectorHotel">Hotel</h3></div>
+            </a>
+
+            <a class="sector-card" data-sector="gimnasio" href="/para-gimnasios" role="button">
+              <img src="assets/gimnasio.png" alt="Chatbot WhatsApp para gimnasios y centros fitness" />
+              <div class="sector-card-body"><h3 data-i18n="sectorGym">Gimnasio</h3></div>
             </a>
           </div>
         </div>
@@ -766,6 +771,7 @@
           <li><a href="/para-estetica" style="color:var(--muted);font-size:.9rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">Estética y belleza</a></li>
           <li><a href="/para-hoteles" style="color:var(--muted);font-size:.9rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">Hoteles</a></li>
           <li><a href="/para-automotriz" style="color:var(--muted);font-size:.9rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">Talleres automotrices</a></li>
+          <li><a href="/para-gimnasios" style="color:var(--muted);font-size:.9rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">Gimnasios y fitness</a></li>
         </ul>
       </div>
       <div>
@@ -1145,6 +1151,42 @@
           ],
           ideal: "Hotels, hostels, and accommodations that want to improve guest communication before and during their stay."
         }
+      },
+      gimnasio: {
+        es: {
+          title: "LÍA para gimnasios",
+          description: "LÍA capta nuevos miembros, responde dudas sobre membresías y clases, y mantiene a tus clientes informados por WhatsApp automáticamente.",
+          benefits: [
+            "Responde preguntas sobre planes, horarios y clases.",
+            "Capta datos de prospectos interesados en membresías.",
+            "Envía recordatorios de clases y vencimientos.",
+            "Atiende consultas fuera del horario del gimnasio.",
+            "Reduce la pérdida de clientes por falta de seguimiento."
+          ],
+          results: [
+            "Más membresías vendidas",
+            "Menor abandono de clientes",
+            "Atención 24/7 sin esfuerzo"
+          ],
+          ideal: "Gimnasios y centros fitness que quieren crecer su base de miembros y mejorar la retención de clientes."
+        },
+        en: {
+          title: "LÍA for gyms",
+          description: "LÍA captures new members, answers questions about memberships and classes, and keeps your clients informed through WhatsApp automatically.",
+          benefits: [
+            "Answers questions about plans, schedules, and classes.",
+            "Captures interested prospect data for memberships.",
+            "Sends class reminders and renewal alerts.",
+            "Handles inquiries outside gym hours.",
+            "Reduces client churn through consistent follow-up."
+          ],
+          results: [
+            "More memberships sold",
+            "Lower client dropout",
+            "24/7 attention with no extra effort"
+          ],
+          ideal: "Gyms and fitness centers that want to grow their member base and improve client retention."
+        }
       }
     };
 
@@ -1183,6 +1225,7 @@
         sectorRealEstate: "Inmobiliaria",
         sectorBeauty: "Estética",
         sectorHotel: "Hotel",
+        sectorGym: "Gimnasio",
         resultsTitle: "Resultados que puedes esperar",
         idealTitle: "Ideal para",
         whatsappCTA: "Hablar por WhatsApp",
@@ -1239,6 +1282,7 @@
         sectorRealEstate: "Real Estate",
         sectorBeauty: "Beauty Salon",
         sectorHotel: "Hotel",
+        sectorGym: "Gym",
         resultsTitle: "Results you can expect",
         idealTitle: "Ideal for",
         whatsappCTA: "Chat on WhatsApp",
@@ -1268,7 +1312,8 @@
       taller: "/para-automotriz",
       inmobiliaria: "/para-inmobiliarias",
       estetica: "/para-estetica",
-      hotel: "/para-hoteles"
+      hotel: "/para-hoteles",
+      gimnasio: "/para-gimnasios"
     };
 
     let currentLang = "es";
@@ -1345,8 +1390,8 @@
       card.appendChild(label);
 
       card.addEventListener("click", (e) => {
-        // Si la tarjeta es un <a> con landing y ya está activa, dejar navegar
-        if (card.tagName === "A" && card.classList.contains("active")) return;
+        // Si la tarjeta es un <a> con landing, navegar directamente
+        if (card.tagName === "A") return;
         e.preventDefault();
         renderSector(key);
       });
