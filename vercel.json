@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/para-clinicas", "destination": "/", "permanent": false }
+    { "source": "/para-clinicas",    "destination": "/", "permanent": false },
+    { "source": "/para-doctor",      "destination": "/", "permanent": false },
+    { "source": "/para-arquitecto",  "destination": "/", "permanent": false },
+    { "source": "/para-comerciante", "destination": "/", "permanent": false },
+    { "source": "/para-abogado",     "destination": "/", "permanent": false }
   ]
 }
