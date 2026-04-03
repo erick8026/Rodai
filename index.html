@@ -635,31 +635,6 @@
 
         <div class="sectors-shell">
           <div class="sector-carousel" id="sectorCarousel">
-            <button class="sector-card" data-sector="doctor" type="button">
-              <img src="assets/doctor.webp" alt="Chatbot IA para WhatsApp en consultorios médicos" />
-              <div class="sector-card-body"><h3 data-i18n="sectorDoctor">Doctor/a</h3></div>
-            </button>
-
-            <button class="sector-card" data-sector="arquitecto" type="button">
-              <img src="assets/arquitecto.webp" alt="Automatización WhatsApp para arquitectos y estudios" />
-              <div class="sector-card-body"><h3 data-i18n="sectorArchitect">Arquitecto/a</h3></div>
-            </button>
-
-            <button class="sector-card" data-sector="comerciante" type="button">
-              <img src="assets/comerciante.webp" alt="Chatbot IA para comerciantes y tiendas LATAM" />
-              <div class="sector-card-body"><h3 data-i18n="sectorMerchant">Comerciante</h3></div>
-            </button>
-
-            <button class="sector-card" data-sector="abogado" type="button">
-              <img src="assets/abogado.webp" alt="Automatización WhatsApp para despachos de abogados" />
-              <div class="sector-card-body"><h3 data-i18n="sectorLawyer">Abogado/a</h3></div>
-            </button>
-
-            <a class="sector-card" data-sector="clinica" href="/para-clinicas" role="button">
-              <img src="assets/clinica.webp" alt="LÍA RODAI chatbot WhatsApp para clínicas y salud" />
-              <div class="sector-card-body"><h3 data-i18n="sectorClinic">Clínica</h3></div>
-            </a>
-
             <a class="sector-card" data-sector="taller" href="/para-automotriz" role="button">
               <img src="assets/taller.png" alt="Chatbot WhatsApp para talleres automotrices" />
               <div class="sector-card-body"><h3 data-i18n="sectorWorkshop">Taller</h3></div>
@@ -689,7 +664,7 @@
 
         <div class="sector-detail hidden" id="sectorDetail">
           <div class="sector-detail-copy">
-            <h3 id="sectorTitle">LÍA para doctores y consultorios</h3>
+            <h3 id="sectorTitle">LÍA para talleres automotrices</h3>
             <p id="sectorDescription">LÍA te ayuda a responder a tus pacientes al instante, organizar tus citas y evitar que pierdas consultas por no responder a tiempo.</p>
             <ul class="sector-benefits" id="sectorBenefits"></ul>
 
@@ -766,7 +741,6 @@
       <div>
         <h4 data-i18n="footerSectors">Sectores</h4>
         <ul style="list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:6px;">
-          <li><a href="/para-clinicas" style="color:var(--muted);font-size:.9rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">Clínicas y consultorios</a></li>
           <li><a href="/para-inmobiliarias" style="color:var(--muted);font-size:.9rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">Inmobiliarias</a></li>
           <li><a href="/para-estetica" style="color:var(--muted);font-size:.9rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">Estética y belleza</a></li>
           <li><a href="/para-hoteles" style="color:var(--muted);font-size:.9rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--muted)'">Hoteles</a></li>
@@ -828,186 +802,6 @@
 
   <script>
     const sectorData = {
-      doctor: {
-        es: {
-          title: "LÍA para doctores y consultorios",
-          description: "LÍA te ayuda a responder a tus pacientes al instante, organizar tus citas y evitar que pierdas consultas por no responder a tiempo.",
-          benefits: [
-            "Responde preguntas frecuentes sobre horarios, ubicación y servicios.",
-            "Registra citas automáticamente por WhatsApp.",
-            "Comparte indicaciones básicas antes de la consulta.",
-            "Mantiene atención 24/7 sin que tengas que estar pendiente.",
-            "Te ayuda a dar una experiencia más rápida y profesional."
-          ],
-          results: [
-            "Menos llamadas repetidas",
-            "Más citas organizadas",
-            "Pacientes mejor atendidos"
-          ],
-          ideal: "Consultorios, especialistas y profesionales que necesitan responder rápido y organizar mejor sus citas."
-        },
-        en: {
-          title: "LÍA for doctors and medical offices",
-          description: "LÍA helps you reply to patients instantly, organize appointments, and avoid losing consultations because of delayed responses.",
-          benefits: [
-            "Answers common questions about schedules, location, and services.",
-            "Registers appointments automatically through WhatsApp.",
-            "Shares basic pre-visit instructions.",
-            "Keeps your business responsive 24/7.",
-            "Helps deliver a faster, more professional experience."
-          ],
-          results: [
-            "Fewer repetitive calls",
-            "Better organized appointments",
-            "Better patient experience"
-          ],
-          ideal: "Medical offices and professionals who need fast replies and smoother appointment handling."
-        }
-      },
-      arquitecto: {
-        es: {
-          title: "LÍA para arquitectos",
-          description: "LÍA te ayuda a responder consultas iniciales, captar clientes interesados y organizar solicitudes de proyectos desde el primer contacto.",
-          benefits: [
-            "Responde dudas sobre tus servicios.",
-            "Capta nombre, teléfono y tipo de proyecto.",
-            "Filtra clientes realmente interesados.",
-            "Agenda reuniones iniciales.",
-            "Evita perder oportunidades por responder tarde."
-          ],
-          results: [
-            "Más prospectos organizados",
-            "Mejor primer contacto",
-            "Menos oportunidades perdidas"
-          ],
-          ideal: "Arquitectos y estudios que reciben consultas frecuentes y quieren ordenar mejor sus oportunidades."
-        },
-        en: {
-          title: "LÍA for architects",
-          description: "LÍA helps you handle first-time inquiries, capture interested prospects, and organize project requests from the first message.",
-          benefits: [
-            "Answers questions about your services.",
-            "Captures name, phone, and project type.",
-            "Filters serious prospects.",
-            "Schedules initial meetings.",
-            "Prevents lost opportunities caused by delayed replies."
-          ],
-          results: [
-            "More organized prospects",
-            "Better first touchpoint",
-            "Fewer missed opportunities"
-          ],
-          ideal: "Architects and studios that want a better way to manage incoming inquiries."
-        }
-      },
-      comerciante: {
-        es: {
-          title: "LÍA para comercios",
-          description: "LÍA te ayuda a atender clientes, responder dudas sobre productos y convertir más conversaciones en oportunidades de venta.",
-          benefits: [
-            "Responde preguntas sobre productos, horarios y ubicación.",
-            "Atiende clientes automáticamente incluso fuera de horario.",
-            "Ayuda a mantener una experiencia de compra más rápida.",
-            "Capta personas interesadas en tus productos.",
-            "Reduce la pérdida de ventas por no contestar a tiempo."
-          ],
-          results: [
-            "Más conversaciones atendidas",
-            "Más clientes satisfechos",
-            "Más oportunidades de venta"
-          ],
-          ideal: "Tiendas y comercios que reciben mensajes frecuentes y necesitan responder rápido para vender mejor."
-        },
-        en: {
-          title: "LÍA for retailers",
-          description: "LÍA helps you assist customers, answer product questions, and turn more chats into sales opportunities.",
-          benefits: [
-            "Answers questions about products, hours, and location.",
-            "Assists customers automatically even outside business hours.",
-            "Creates a faster shopping experience.",
-            "Captures interested shoppers.",
-            "Reduces lost sales caused by slow replies."
-          ],
-          results: [
-            "More conversations handled",
-            "Happier customers",
-            "More sales opportunities"
-          ],
-          ideal: "Shops and local businesses that need faster replies to sell more."
-        }
-      },
-      abogado: {
-        es: {
-          title: "LÍA para abogados y despachos",
-          description: "LÍA te ayuda a responder consultas iniciales, captar posibles clientes y agendar reuniones de una forma más rápida y profesional.",
-          benefits: [
-            "Responde preguntas frecuentes sobre tus servicios.",
-            "Capta datos de clientes potenciales.",
-            "Clasifica el tipo de consulta o caso.",
-            "Agenda reuniones iniciales.",
-            "Da una primera atención más ordenada y profesional."
-          ],
-          results: [
-            "Más contactos bien organizados",
-            "Mejor imagen profesional",
-            "Menos consultas perdidas"
-          ],
-          ideal: "Abogados y despachos que quieren atender mejor a nuevos clientes desde el primer mensaje."
-        },
-        en: {
-          title: "LÍA for lawyers and law firms",
-          description: "LÍA helps you handle first consultations, capture potential clients, and schedule meetings faster and more professionally.",
-          benefits: [
-            "Answers common questions about your services.",
-            "Captures potential client data.",
-            "Classifies the type of inquiry or case.",
-            "Schedules initial meetings.",
-            "Creates a more professional first response."
-          ],
-          results: [
-            "Better organized leads",
-            "Stronger professional image",
-            "Fewer missed inquiries"
-          ],
-          ideal: "Lawyers and firms that want to improve first response and intake."
-        }
-      },
-      clinica: {
-        es: {
-          title: "LÍA para clínicas",
-          description: "LÍA te ayuda a atender pacientes, registrar citas y mantener una experiencia más organizada desde el primer contacto.",
-          benefits: [
-            "Responde preguntas frecuentes de pacientes.",
-            "Registra citas por WhatsApp.",
-            "Comparte horarios, ubicación y servicios.",
-            "Ayuda a reducir tiempos de respuesta.",
-            "Mejora la atención desde el primer mensaje."
-          ],
-          results: [
-            "Pacientes mejor informados",
-            "Agenda más ordenada",
-            "Atención más consistente"
-          ],
-          ideal: "Clínicas que necesitan una atención más rápida y organizada para pacientes nuevos y recurrentes."
-        },
-        en: {
-          title: "LÍA for clinics",
-          description: "LÍA helps you assist patients, register appointments, and create a more organized experience from the very first message.",
-          benefits: [
-            "Answers common patient questions.",
-            "Registers appointments through WhatsApp.",
-            "Shares hours, location, and services.",
-            "Helps reduce response times.",
-            "Improves the first-contact experience."
-          ],
-          results: [
-            "Better informed patients",
-            "More organized schedule",
-            "More consistent support"
-          ],
-          ideal: "Clinics that need faster, more organized communication with patients."
-        }
-      },
       taller: {
         es: {
           title: "LÍA para talleres",
@@ -1216,11 +1010,6 @@
         sectorsEyebrow: "Cómo ayuda LÍA",
         sectorsTitle: "¿Para quién es LÍA RODAI?",
         sectorsText: "Elige tu tipo de negocio y descubre cómo LÍA puede ayudarte a atender clientes, agendar citas y generar oportunidades automáticamente.",
-        sectorDoctor: "Doctor/a",
-        sectorArchitect: "Arquitecto/a",
-        sectorMerchant: "Comerciante",
-        sectorLawyer: "Abogado/a",
-        sectorClinic: "Clínica",
         sectorWorkshop: "Taller",
         sectorRealEstate: "Inmobiliaria",
         sectorBeauty: "Estética",
@@ -1273,11 +1062,6 @@
         sectorsEyebrow: "How LÍA helps",
         sectorsTitle: "Who is LÍA RODAI for?",
         sectorsText: "Choose your type of business and discover how LÍA can help you assist customers, schedule appointments, and generate opportunities automatically.",
-        sectorDoctor: "Doctor",
-        sectorArchitect: "Architect",
-        sectorMerchant: "Retailer",
-        sectorLawyer: "Lawyer",
-        sectorClinic: "Clinic",
         sectorWorkshop: "Workshop",
         sectorRealEstate: "Real Estate",
         sectorBeauty: "Beauty Salon",
@@ -1308,7 +1092,6 @@
     };
 
     const sectorLandings = {
-      clinica: "/para-clinicas",
       taller: "/para-automotriz",
       inmobiliaria: "/para-inmobiliarias",
       estetica: "/para-estetica",
