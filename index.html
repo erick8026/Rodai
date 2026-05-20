@@ -512,6 +512,37 @@
       .sector-actions { flex-direction: column; }
       .sector-actions .btn { width: 100%; }
     }
+
+    /* ── Video Demo ── */
+    .video-demo .section-heading { margin-bottom: 40px; }
+    .video-demo .section-heading h2 { margin-top: 10px; }
+    .video-demo .section-heading p  { color: var(--muted); margin: 10px auto 0; max-width: 52ch; }
+
+    .video-shell {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 5px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      border: 1px solid rgba(51,182,255,0.28);
+      box-shadow: 0 32px 80px rgba(3,8,30,.72), 0 0 0 1px rgba(143,76,255,.12);
+    }
+
+    .video-ratio {
+      position: relative;
+      padding-bottom: 56.25%;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #050d1e;
+    }
+
+    .video-ratio iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
   </style>
 
   <!-- JSON-LD Schema -->
@@ -569,6 +600,7 @@
       <nav>
         <a href="#sectores" data-i18n="navSectors">Sectores</a>
         <a href="#como-funciona" data-i18n="navHow">Cómo funciona</a>
+        <a href="#demo">Ver demo</a>
         <a href="/precios" data-i18n="navPlans">Planes</a>
         <a href="#contacto" data-i18n="navContact">Contacto</a>
       </nav>
@@ -721,6 +753,27 @@
       </div>
     </section>
 
+    <!-- ── Sección de Video ── -->
+    <section class="section video-demo" id="demo">
+      <div class="container">
+        <div class="section-heading center">
+          <p class="eyebrow">Míralo en acción</p>
+          <h2>Descubre cómo LÍA transforma tu negocio inmobiliario</h2>
+          <p>Todo lo que LÍA hace por ti, explicado en menos de 2 minutos.</p>
+        </div>
+        <div class="video-shell">
+          <div class="video-ratio">
+            <iframe
+              src="https://player.vimeo.com/video/1194076479?badge=0&autopause=0&player_id=0&app_id=58479"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              title="RODAI: Automatización Inmobiliaria con LIA">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section cta-band">
       <div class="container cta-band-inner">
         <div>
@@ -764,6 +817,9 @@
       </div>
     </div>
   </footer>
+
+  <!-- Vimeo Player API -->
+  <script src="https://player.vimeo.com/api/player.js" defer></script>
 
   <!-- RODAI Chatbot Widget -->
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
