@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto | RodAI — IA y Automatización</title>
+  <meta name="description" content="Contacta al equipo de RodAI. Correo info@rodai.io, WhatsApp disponible. El Salvador." />
+  <link rel="canonical" href="https://rodai.io/contact" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rodai.io/contact" />
+  <meta property="og:title" content="Contacto | RodAI — IA y Automatización" />
+  <meta property="og:description" content="Contacta al equipo de RodAI. Correo info@rodai.io, WhatsApp disponible. El Salvador." />
+  <meta property="og:image" content="https://rodai.io/assets/og-image.png" />
+  <meta property="og:locale" content="es_LA" />
+  <meta property="og:site_name" content="RODAI" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contacto | RodAI — IA y Automatización" />
+  <meta name="twitter:description" content="Contacta al equipo de RodAI. Correo info@rodai.io, WhatsApp disponible. El Salvador." />
+  <meta name="twitter:image" content="https://rodai.io/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #07112f;
+      --bg-soft: #0c1945;
+      --panel: rgba(255,255,255,0.08);
+      --text: #ecf2ff;
+      --muted: #b9c6ee;
+      --line: rgba(255,255,255,0.14);
+      --blue: #33b6ff;
+      --purple: #8f4cff;
+      --green: #29d17d;
+      --white: #ffffff;
+      --shadow: 0 18px 60px rgba(3,8,30,0.45);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(143,76,255,0.25), transparent 28%),
+        radial-gradient(circle at top left, rgba(51,182,255,0.18), transparent 24%),
+        linear-gradient(180deg, #060d27 0%, #081338 40%, #060d27 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section { padding: 88px 0; }
+    .center { text-align: center; }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .8rem;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: rgba(5,10,26,0.7);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: var(--shadow);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+    }
+
+    nav a:hover { color: var(--white); }
+    nav a.active { color: var(--white); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 700;
+      transition: .2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn-sm { padding: 10px 16px; font-size: .94rem; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), #13a763);
+      color: #041123;
+      box-shadow: 0 10px 30px rgba(41,209,125,0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      border-color: var(--line);
+      color: var(--white);
+    }
+
+    .btn-wa {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(37,211,102,0.3);
+    }
+
+    /* Page Hero */
+    .page-hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .page-hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.1;
+    }
+
+    .page-hero p {
+      margin: 0 auto;
+      max-width: 55ch;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* Contact grid */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Contact cards */
+    .contact-cards {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 20px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .contact-card .icon-wrap {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-card .icon-wrap.blue { background: rgba(51,182,255,0.15); }
+    .contact-card .icon-wrap.green { background: rgba(41,209,125,0.15); }
+    .contact-card .icon-wrap.purple { background: rgba(143,76,255,0.15); }
+    .contact-card .icon-wrap.orange { background: rgba(255,165,50,0.15); }
+    .contact-card .icon-wrap.sky { background: rgba(14,165,233,0.15); }
+
+    .contact-card-text .label {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .contact-card-text .value {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .contact-card-text .value a {
+      color: var(--blue);
+    }
+
+    .contact-card-text .value a:hover {
+      color: var(--white);
+    }
+
+    /* Form */
+    .form-box {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      padding: 36px 32px;
+    }
+
+    .form-box h2 {
+      margin: 0 0 24px;
+      font-size: 1.4rem;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: .95rem;
+      transition: border-color .15s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: rgba(51,182,255,0.5);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(185,198,238,0.45);
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+    }
+
+    .form-note {
+      margin-top: 12px;
+      font-size: .82rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* WA CTA */
+    .wa-cta {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .wa-cta h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    }
+
+    .wa-cta p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 48px 0 44px;
+      border-top: 1px solid var(--line);
+      background: rgba(2,5,18,0.52);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 32px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .footer-brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .footer-brand span { font-weight: 800; font-size: 1.05rem; }
+
+    .site-footer h4 {
+      margin: 0 0 14px;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .site-footer p {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.6;
+      margin: 0 0 10px;
+    }
+
+    .footer-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: .9rem;
+      transition: color .15s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      margin-top: 32px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      color: var(--white);
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .wa-cta { flex-direction: column; align-items: flex-start; }
+      nav { display: none; }
+      nav.open { display: flex; flex-direction: column; position: absolute; top: 76px; left: 0; right: 0; background: rgba(5,10,26,0.97); padding: 16px 20px; border-bottom: 1px solid var(--line); z-index: 29; }
+      .nav-toggle { display: block; }
+      .site-header { position: relative; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .section { padding: 60px 0; }
+      .page-hero { padding: 60px 0 40px; }
+      .form-box { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/" class="brand">
+          <img src="/logo.jpg" alt="RodAI logo" />
+          RODAI
+        </a>
+        <button class="nav-toggle" aria-label="Menú" onclick="document.querySelector('nav').classList.toggle('open')">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/>
+          </svg>
+        </button>
+        <nav>
+          <a href="/">Inicio</a>
+          <a href="/#sectores">Sectores</a>
+          <a href="/precios">Planes</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contact" class="active">Contacto</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="https://wa.me/50366814903" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
+            Solicitar demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Contacto</p>
+      <h1>Hablemos</h1>
+      <p>Estamos aquí para responder tus preguntas</p>
+    </div>
+  </section>
+
+  <!-- Contact section -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Left: contact cards -->
+        <div class="contact-cards">
+
+          <div class="contact-card">
+            <div class="icon-wrap blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#33b6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div class="contact-card-text">
+              <div class="label">Correo</div>
+              <div class="value"><a href="mailto:info@rodai.io">info@rodai.io</a></div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="icon-wrap green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#29d17d">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.86L0 24l6.335-1.509A11.932 11.932 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.793 9.793 0 0 1-5.031-1.383l-.36-.214-3.731.889.923-3.636-.235-.373A9.77 9.77 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182 17.43 2.182 21.818 6.57 21.818 12c0 5.43-4.388 9.818-9.818 9.818z"/>
+              </svg>
+            </div>
+            <div class="contact-card-text">
+              <div class="label">WhatsApp</div>
+              <div class="value"><a href="https://wa.me/50366814903" target="_blank" rel="noopener">+503 6681-4903</a></div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="icon-wrap purple">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8f4cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div class="contact-card-text">
+              <div class="label">País</div>
+              <div class="value">El Salvador</div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="icon-wrap orange">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffaa33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div class="contact-card-text">
+              <div class="label">Horario</div>
+              <div class="value">Lunes a Viernes, 8:00 AM – 6:00 PM (UTC-6)</div>
+            </div>
+          </div>
+
+          <!-- PLACEHOLDER: LinkedIn -->
+          <!-- PLACEHOLDER: reemplazar [LINKEDIN_URL] con la URL real de LinkedIn de RodAI -->
+          <div class="contact-card">
+            <div class="icon-wrap sky">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#0ea5e9">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </div>
+            <div class="contact-card-text">
+              <div class="label">LinkedIn</div>
+              <!-- PLACEHOLDER: reemplazar href con la URL real -->
+              <div class="value"><a href="[LINKEDIN_URL]" target="_blank" rel="noopener" style="color: var(--muted);">[LINKEDIN_URL]</a></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: form -->
+        <div class="form-box">
+          <h2>Envíanos un mensaje</h2>
+          <!-- Solución estática: mailto -->
+          <form action="mailto:info@rodai.io" method="get" enctype="text/plain">
+            <div class="form-group">
+              <label for="name">Nombre</label>
+              <input type="text" id="name" name="name" placeholder="Tu nombre completo" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" placeholder="tu@correo.com" required />
+            </div>
+            <div class="form-group">
+              <label for="empresa">Empresa <span style="font-weight:400; opacity:.6;">(opcional)</span></label>
+              <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa" />
+            </div>
+            <div class="form-group">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="body" placeholder="Cuéntanos en qué podemos ayudarte..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit">
+              Enviar mensaje
+            </button>
+            <p class="form-note">Al enviar, se abrirá tu cliente de correo para completar el envío.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp CTA -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="wa-cta">
+        <div>
+          <h2>¿Prefieres respuesta inmediata?</h2>
+          <p>Escríbenos por WhatsApp y te respondemos a la brevedad.</p>
+        </div>
+        <a href="https://wa.me/50366814903" class="btn btn-wa" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.86L0 24l6.335-1.509A11.932 11.932 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.793 9.793 0 0 1-5.031-1.383l-.36-.214-3.731.889.923-3.636-.235-.373A9.77 9.77 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182 17.43 2.182 21.818 6.57 21.818 12c0 5.43-4.388 9.818-9.818 9.818z"/>
+          </svg>
+          Escribir por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img src="/logo.jpg" alt="RodAI logo" />
+            <span>RODAI</span>
+          </div>
+          <p>Automatización con IA desde El Salvador</p>
+          <p><a href="mailto:info@rodai.io">info@rodai.io</a></p>
+          <p style="margin-top: 16px; font-size: .82rem;">© 2024 RodAI. Todos los derechos reservados.</p>
+        </div>
+        <div>
+          <h4>Sectores</h4>
+          <ul class="footer-links">
+            <li><a href="/para-inmobiliarias">Inmobiliarias</a></li>
+            <li><a href="/para-estetica">Estéticas</a></li>
+            <li><a href="/para-hoteles">Hoteles</a></li>
+            <li><a href="/para-automotriz">Talleres</a></li>
+            <li><a href="/para-gimnasios">Gimnasios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Empresa</h4>
+          <ul class="footer-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/precios">Planes</a></li>
+            <li><a href="/nosotros">Nosotros</a></li>
+            <li><a href="/contact">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy">Política de Privacidad</a></li>
+            <li><a href="/terms">Términos de Servicio</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        El Salvador · <a href="mailto:info@rodai.io">info@rodai.io</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

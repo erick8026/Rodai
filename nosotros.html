@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acerca de RodAI | Automatización con IA desde El Salvador</title>
+  <meta name="description" content="Conoce qué es RodAI, nuestra misión, visión y la plataforma de IA y automatización desarrollada desde El Salvador." />
+  <link rel="canonical" href="https://rodai.io/nosotros" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rodai.io/nosotros" />
+  <meta property="og:title" content="Acerca de RodAI | Automatización con IA desde El Salvador" />
+  <meta property="og:description" content="Conoce qué es RodAI, nuestra misión, visión y la plataforma de IA y automatización desarrollada desde El Salvador." />
+  <meta property="og:image" content="https://rodai.io/assets/og-image.png" />
+  <meta property="og:locale" content="es_LA" />
+  <meta property="og:site_name" content="RODAI" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Acerca de RodAI | Automatización con IA desde El Salvador" />
+  <meta name="twitter:description" content="Conoce qué es RodAI, nuestra misión, visión y la plataforma de IA y automatización desarrollada desde El Salvador." />
+  <meta name="twitter:image" content="https://rodai.io/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #07112f;
+      --bg-soft: #0c1945;
+      --panel: rgba(255,255,255,0.08);
+      --text: #ecf2ff;
+      --muted: #b9c6ee;
+      --line: rgba(255,255,255,0.14);
+      --blue: #33b6ff;
+      --purple: #8f4cff;
+      --green: #29d17d;
+      --white: #ffffff;
+      --shadow: 0 18px 60px rgba(3,8,30,0.45);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(143,76,255,0.25), transparent 28%),
+        radial-gradient(circle at top left, rgba(51,182,255,0.18), transparent 24%),
+        linear-gradient(180deg, #060d27 0%, #081338 40%, #060d27 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section { padding: 88px 0; }
+    .center { text-align: center; }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .8rem;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: rgba(5,10,26,0.7);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: var(--shadow);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+    }
+
+    nav a:hover { color: var(--white); }
+    nav a.active { color: var(--white); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 700;
+      transition: .2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn-sm { padding: 10px 16px; font-size: .94rem; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), #13a763);
+      color: #041123;
+      box-shadow: 0 10px 30px rgba(41,209,125,0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.06);
+      border-color: var(--line);
+      color: var(--white);
+    }
+
+    /* Page Hero */
+    .page-hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .page-hero h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      line-height: 1.1;
+    }
+
+    .page-hero p {
+      margin: 0 auto;
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* Cards grid */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pillar-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      padding: 28px 24px;
+    }
+
+    .pillar-card .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .pillar-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+
+    .pillar-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .94rem;
+      line-height: 1.6;
+    }
+
+    /* Mission / Vision */
+    .mv-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .mv-box {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      padding: 36px 32px;
+    }
+
+    .mv-box .label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .mv-box.mission .label { background: rgba(51,182,255,0.15); color: var(--blue); }
+    .mv-box.vision .label { background: rgba(143,76,255,0.15); color: var(--purple); }
+
+    .mv-box h2 {
+      margin: 0;
+      font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    /* El Salvador section */
+    .sv-box {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .sv-box h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+    }
+
+    .sv-box p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 56ch;
+    }
+
+    .flag-badge {
+      font-size: 4rem;
+      line-height: 1;
+    }
+
+    /* Status badge */
+    .status-banner {
+      background: rgba(41,209,125,0.1);
+      border: 1px solid rgba(41,209,125,0.3);
+      border-radius: 20px;
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .status-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(41,209,125,0.6);
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 12px rgba(41,209,125,0.6); }
+      50% { box-shadow: 0 0 22px rgba(41,209,125,0.9); }
+    }
+
+    .status-banner strong {
+      color: var(--green);
+    }
+
+    .status-banner p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* CTA band */
+    .cta-band-inner {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 40px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .cta-band-inner h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.5rem, 2.8vw, 2rem);
+    }
+
+    .cta-band-inner p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    /* Section headings */
+    .section-heading {
+      margin-bottom: 48px;
+    }
+
+    .section-heading h2 {
+      margin: 8px 0 14px;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      line-height: 1.12;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 48px 0 44px;
+      border-top: 1px solid var(--line);
+      background: rgba(2,5,18,0.52);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 32px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .footer-brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .footer-brand span {
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .site-footer h4 {
+      margin: 0 0 14px;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .site-footer p {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.6;
+      margin: 0 0 10px;
+    }
+
+    .footer-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: .9rem;
+      transition: color .15s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      margin-top: 32px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* Mobile nav */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      color: var(--white);
+    }
+
+    @media (max-width: 768px) {
+      .pillars-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .mv-grid { grid-template-columns: 1fr; }
+      .sv-box { grid-template-columns: 1fr; }
+      .flag-badge { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .cta-band-inner { flex-direction: column; align-items: flex-start; }
+      nav { display: none; }
+      nav.open { display: flex; flex-direction: column; position: absolute; top: 76px; left: 0; right: 0; background: rgba(5,10,26,0.97); padding: 16px 20px; border-bottom: 1px solid var(--line); z-index: 29; }
+      .nav-toggle { display: block; }
+      .site-header { position: relative; }
+    }
+
+    @media (max-width: 480px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .section { padding: 60px 0; }
+      .page-hero { padding: 60px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/" class="brand">
+          <img src="/logo.jpg" alt="RodAI logo" />
+          RODAI
+        </a>
+        <button class="nav-toggle" aria-label="Menú" onclick="document.querySelector('nav').classList.toggle('open')">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/>
+          </svg>
+        </button>
+        <nav>
+          <a href="/">Inicio</a>
+          <a href="/#sectores">Sectores</a>
+          <a href="/precios">Planes</a>
+          <a href="/nosotros" class="active">Nosotros</a>
+          <a href="/contact">Contacto</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="https://wa.me/50366814903" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
+            Solicitar demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Acerca de</p>
+      <h1>Acerca de RodAI</h1>
+      <p>Construyendo el futuro de la automatización desde El Salvador</p>
+    </div>
+  </section>
+
+  <!-- Qué es RodAI -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+        <div>
+          <p class="eyebrow">La plataforma</p>
+          <h2 style="margin: 8px 0 20px; font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.12;">Qué es RodAI</h2>
+          <p style="color: var(--muted); line-height: 1.7; margin: 0 0 16px;">
+            RodAI es una plataforma de inteligencia artificial y automatización diseñada para negocios que buscan ofrecer una mejor atención al cliente, automatizar sus procesos repetitivos y mantener visibilidad en tiempo real de sus operaciones.
+          </p>
+          <p style="color: var(--muted); line-height: 1.7; margin: 0 0 16px;">
+            Integra agentes de IA conversacionales, flujos de automatización y herramientas de monitoreo en una solución unificada, accesible desde el primer día.
+          </p>
+          <p style="color: var(--muted); line-height: 1.7; margin: 0;">
+            El proyecto está en desarrollo activo: cada semana incorporamos mejoras, nuevas integraciones y capacidades basadas en el uso real de nuestros clientes.
+          </p>
+        </div>
+        <div style="display:grid; gap: 14px;">
+          <div style="background: linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.05)); border:1px solid var(--line); border-radius: 18px; padding: 20px 24px;">
+            <strong style="color: var(--blue);">Atención 24/7</strong>
+            <p style="margin: 6px 0 0; color: var(--muted); font-size: .94rem;">Agentes de IA que responden a tus clientes en cualquier momento, sin interrupciones.</p>
+          </div>
+          <div style="background: linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.05)); border:1px solid var(--line); border-radius: 18px; padding: 20px 24px;">
+            <strong style="color: var(--purple);">Automatización de procesos</strong>
+            <p style="margin: 6px 0 0; color: var(--muted); font-size: .94rem;">Reduce el trabajo manual eliminando tareas repetitivas con flujos inteligentes.</p>
+          </div>
+          <div style="background: linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.05)); border:1px solid var(--line); border-radius: 18px; padding: 20px 24px;">
+            <strong style="color: var(--green);">Monitoreo en tiempo real</strong>
+            <p style="margin: 6px 0 0; color: var(--muted); font-size: .94rem;">Visibilidad completa de conversaciones, métricas y estado del servicio.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cuatro pilares -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-heading center">
+        <p class="eyebrow">Lo que hacemos</p>
+        <h2>Cuatro pilares fundamentales</h2>
+        <p style="margin: 0 auto;">Las capacidades core que forman la plataforma RodAI.</p>
+      </div>
+      <div class="pillars-grid">
+
+        <!-- Inteligencia Artificial -->
+        <div class="pillar-card">
+          <div class="icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+              <circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/>
+            </svg>
+          </div>
+          <h3>Inteligencia Artificial</h3>
+          <p>Modelos de lenguaje entrenados para entender y responder consultas de negocio. Conversaciones naturales sin scripts rígidos.</p>
+        </div>
+
+        <!-- Automatización -->
+        <div class="pillar-card">
+          <div class="icon" style="background: linear-gradient(135deg, var(--purple), #6b35cc);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <h3>Automatización</h3>
+          <p>Flujos que eliminan tareas manuales: envíos, notificaciones, seguimientos y más. Se activan solos, en el momento correcto.</p>
+        </div>
+
+        <!-- Monitoreo -->
+        <div class="pillar-card">
+          <div class="icon" style="background: linear-gradient(135deg, var(--green), #13a763);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/>
+              <polyline points="6 12 9 9 12 11 15 7 18 10"/>
+            </svg>
+          </div>
+          <h3>Monitoreo</h3>
+          <p>Panel de control con métricas de conversaciones, tiempos de respuesta y estado del servicio, accesible en tiempo real.</p>
+        </div>
+
+        <!-- Atención al Cliente -->
+        <div class="pillar-card">
+          <div class="icon" style="background: linear-gradient(135deg, #ff6b6b, #cc4444);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <h3>Atención al Cliente</h3>
+          <p>Canal unificado para gestionar interacciones de clientes vía WhatsApp y otros canales, con historial y contexto completo.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Misión y Visión -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="mv-grid">
+        <div class="mv-box mission">
+          <span class="label">Misión</span>
+          <h2>Hacer que la inteligencia artificial sea accesible y práctica para negocios de todos los tamaños en LATAM</h2>
+        </div>
+        <div class="mv-box vision">
+          <span class="label">Visión</span>
+          <h2>Ser la plataforma de referencia en automatización inteligente para empresas hispanohablantes</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Desarrollado en El Salvador -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="sv-box">
+        <div>
+          <p class="eyebrow">Origen</p>
+          <h2>Desarrollado en El Salvador</h2>
+          <p>
+            RodAI es un proyecto 100% construido desde El Salvador, con enfoque en el mercado latinoamericano y hispanohablante. Entendemos los retos reales de los negocios en nuestra región: desde las particularidades del español local hasta las necesidades operativas de pequeñas y medianas empresas.
+          </p>
+          <p style="margin-top: 14px;">
+            Construimos pensando en negocios como los nuestros: ágiles, orientados a resultados y con recursos limitados. Por eso RodAI está diseñado para ser fácil de implementar y entregar valor desde el primer día.
+          </p>
+        </div>
+        <div class="flag-badge" aria-hidden="true">🇸🇻</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estado actual -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="status-banner">
+        <div class="status-dot"></div>
+        <div>
+          <strong>Desarrollo Activo</strong>
+          <p>La plataforma RodAI se encuentra en desarrollo activo. Estamos mejorando constantemente las funcionalidades, estabilidad e integraciones disponibles. Los clientes actuales tienen acceso anticipado y su feedback da forma directamente al producto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="cta-band-inner">
+        <div>
+          <h2>¿Listo para automatizar tu negocio?</h2>
+          <p>Hablemos y exploremos cómo RodAI puede ayudarte.</p>
+        </div>
+        <a href="https://wa.me/50366814903" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.86L0 24l6.335-1.509A11.932 11.932 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.793 9.793 0 0 1-5.031-1.383l-.36-.214-3.731.889.923-3.636-.235-.373A9.77 9.77 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182 17.43 2.182 21.818 6.57 21.818 12c0 5.43-4.388 9.818-9.818 9.818z"/>
+          </svg>
+          Solicitar demo por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand -->
+        <div>
+          <div class="footer-brand">
+            <img src="/logo.jpg" alt="RodAI logo" />
+            <span>RODAI</span>
+          </div>
+          <p>Automatización con IA desde El Salvador</p>
+          <p><a href="mailto:info@rodai.io">info@rodai.io</a></p>
+          <p style="margin-top: 16px; font-size: .82rem;">© 2024 RodAI. Todos los derechos reservados.</p>
+        </div>
+        <!-- Col 2: Sectores -->
+        <div>
+          <h4>Sectores</h4>
+          <ul class="footer-links">
+            <li><a href="/para-inmobiliarias">Inmobiliarias</a></li>
+            <li><a href="/para-estetica">Estéticas</a></li>
+            <li><a href="/para-hoteles">Hoteles</a></li>
+            <li><a href="/para-automotriz">Talleres</a></li>
+            <li><a href="/para-gimnasios">Gimnasios</a></li>
+          </ul>
+        </div>
+        <!-- Col 3: Empresa -->
+        <div>
+          <h4>Empresa</h4>
+          <ul class="footer-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/precios">Planes</a></li>
+            <li><a href="/nosotros">Nosotros</a></li>
+            <li><a href="/contact">Contacto</a></li>
+          </ul>
+        </div>
+        <!-- Col 4: Legal -->
+        <div>
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy">Política de Privacidad</a></li>
+            <li><a href="/terms">Términos de Servicio</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        El Salvador · <a href="mailto:info@rodai.io">info@rodai.io</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

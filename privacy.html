@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidad | RodAI</title>
+  <meta name="description" content="Cómo RodAI recopila, usa y protege tus datos. Incluye uso de integraciones y automatizaciones." />
+  <link rel="canonical" href="https://rodai.io/privacy" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rodai.io/privacy" />
+  <meta property="og:title" content="Política de Privacidad | RodAI" />
+  <meta property="og:description" content="Cómo RodAI recopila, usa y protege tus datos. Incluye uso de integraciones y automatizaciones." />
+  <meta property="og:image" content="https://rodai.io/assets/og-image.png" />
+  <meta property="og:locale" content="es_LA" />
+  <meta property="og:site_name" content="RODAI" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Política de Privacidad | RodAI" />
+  <meta name="twitter:description" content="Cómo RodAI recopila, usa y protege tus datos. Incluye uso de integraciones y automatizaciones." />
+  <meta name="twitter:image" content="https://rodai.io/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #07112f;
+      --bg-soft: #0c1945;
+      --panel: rgba(255,255,255,0.08);
+      --text: #ecf2ff;
+      --muted: #b9c6ee;
+      --line: rgba(255,255,255,0.14);
+      --blue: #33b6ff;
+      --purple: #8f4cff;
+      --green: #29d17d;
+      --white: #ffffff;
+      --shadow: 0 18px 60px rgba(3,8,30,0.45);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(143,76,255,0.25), transparent 28%),
+        radial-gradient(circle at top left, rgba(51,182,255,0.18), transparent 24%),
+        linear-gradient(180deg, #060d27 0%, #081338 40%, #060d27 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section { padding: 88px 0; }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--blue);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .8rem;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: rgba(5,10,26,0.7);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: var(--shadow);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+    }
+
+    nav a:hover { color: var(--white); }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 700;
+      transition: .2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn-sm { padding: 10px 16px; font-size: .94rem; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), #13a763);
+      color: #041123;
+      box-shadow: 0 10px 30px rgba(41,209,125,0.35);
+    }
+
+    /* Page Hero */
+    .page-hero {
+      padding: 80px 0 50px;
+      text-align: center;
+    }
+
+    .page-hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.1;
+    }
+
+    .page-hero p {
+      margin: 0 auto;
+      max-width: 55ch;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Legal document */
+    .legal-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* TOC sidebar */
+    .legal-toc {
+      position: sticky;
+      top: 96px;
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px 20px;
+    }
+
+    .legal-toc h3 {
+      margin: 0 0 14px;
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .legal-toc ol {
+      margin: 0;
+      padding: 0 0 0 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .legal-toc li a {
+      color: var(--muted);
+      font-size: .85rem;
+      line-height: 1.4;
+      transition: color .15s;
+    }
+
+    .legal-toc li a:hover { color: var(--blue); }
+
+    /* Document body */
+    .legal-body {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      padding: 48px 44px;
+    }
+
+    .legal-body .meta {
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .legal-body .meta strong {
+      color: var(--text);
+    }
+
+    .legal-section {
+      margin-bottom: 40px;
+    }
+
+    .legal-section:last-child { margin-bottom: 0; }
+
+    .legal-section h2 {
+      margin: 0 0 14px;
+      font-size: 1.15rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .legal-section h2 .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      font-size: .8rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .legal-section p {
+      color: var(--muted);
+      line-height: 1.72;
+      margin: 0 0 12px;
+      font-size: .95rem;
+    }
+
+    .legal-section p:last-child { margin-bottom: 0; }
+
+    .legal-section ul {
+      color: var(--muted);
+      padding-left: 22px;
+      margin: 8px 0 12px;
+      line-height: 1.7;
+      font-size: .95rem;
+    }
+
+    .legal-section ul li { margin-bottom: 6px; }
+
+    /* Highlight box for integration note */
+    .info-callout {
+      background: rgba(51,182,255,0.08);
+      border: 1px solid rgba(51,182,255,0.2);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 14px 0;
+    }
+
+    .info-callout p {
+      color: var(--muted);
+      font-size: .9rem;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .info-callout strong {
+      color: var(--blue);
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 48px 0 44px;
+      border-top: 1px solid var(--line);
+      background: rgba(2,5,18,0.52);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 32px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .footer-brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .footer-brand span { font-weight: 800; font-size: 1.05rem; }
+
+    .site-footer h4 {
+      margin: 0 0 14px;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .site-footer p {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.6;
+      margin: 0 0 10px;
+    }
+
+    .footer-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: .9rem;
+      transition: color .15s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      margin-top: 32px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      color: var(--white);
+    }
+
+    @media (max-width: 900px) {
+      .legal-layout { grid-template-columns: 1fr; }
+      .legal-toc { position: static; display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      nav { display: none; }
+      nav.open { display: flex; flex-direction: column; position: absolute; top: 76px; left: 0; right: 0; background: rgba(5,10,26,0.97); padding: 16px 20px; border-bottom: 1px solid var(--line); z-index: 29; }
+      .nav-toggle { display: block; }
+      .site-header { position: relative; }
+      .legal-body { padding: 28px 22px; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .section { padding: 60px 0; }
+      .page-hero { padding: 60px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/" class="brand">
+          <img src="/logo.jpg" alt="RodAI logo" />
+          RODAI
+        </a>
+        <button class="nav-toggle" aria-label="Menú" onclick="document.querySelector('nav').classList.toggle('open')">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="14" x2="17" y2="14"/>
+          </svg>
+        </button>
+        <nav>
+          <a href="/">Inicio</a>
+          <a href="/#sectores">Sectores</a>
+          <a href="/precios">Planes</a>
+          <a href="/nosotros">Nosotros</a>
+          <a href="/contact">Contacto</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="https://wa.me/50366814903" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
+            Solicitar demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Legal</p>
+      <h1>Política de Privacidad</h1>
+      <p>Cómo recopilamos, usamos y protegemos tu información</p>
+    </div>
+  </section>
+
+  <!-- Privacy content -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="legal-layout">
+
+        <!-- TOC -->
+        <nav class="legal-toc" aria-label="Índice">
+          <h3>Índice</h3>
+          <ol>
+            <li><a href="#intro">Introducción</a></li>
+            <li><a href="#datos">Datos que recopilamos</a></li>
+            <li><a href="#uso">Cómo usamos los datos</a></li>
+            <li><a href="#integraciones">Integraciones y automatizaciones</a></li>
+            <li><a href="#seguridad">Seguridad</a></li>
+            <li><a href="#retencion">Retención de datos</a></li>
+            <li><a href="#derechos">Tus derechos</a></li>
+            <li><a href="#cookies">Cookies</a></li>
+            <li><a href="#cambios">Cambios a esta política</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ol>
+        </nav>
+
+        <!-- Document -->
+        <div class="legal-body">
+
+          <div class="meta">
+            <p><strong>Última actualización:</strong> 2024</p>
+            <p style="margin:0;">En RodAI nos comprometemos a proteger tu privacidad. Esta Política de Privacidad explica qué datos recopilamos, cómo los usamos y cómo los protegemos cuando utilizas nuestros servicios.</p>
+          </div>
+
+          <div class="legal-section" id="intro">
+            <h2><span class="num">1</span> Introducción</h2>
+            <p>RodAI ("nosotros", "nuestro") opera una plataforma de inteligencia artificial y automatización para negocios. Esta política aplica a todos los datos que procesamos en el contexto de la prestación de nuestros servicios, incluyendo los datos de nuestros clientes directos (empresas) y los datos de los usuarios finales de dichos clientes que interactúan a través de nuestras integraciones.</p>
+            <p>Al utilizar nuestros servicios, usted acepta las prácticas descritas en esta Política de Privacidad.</p>
+          </div>
+
+          <div class="legal-section" id="datos">
+            <h2><span class="num">2</span> Datos que recopilamos</h2>
+            <p>Recopilamos los siguientes tipos de información:</p>
+            <p><strong style="color: var(--text);">Datos de cuenta y registro:</strong></p>
+            <ul>
+              <li>Nombre y apellidos</li>
+              <li>Dirección de correo electrónico</li>
+              <li>Número de teléfono</li>
+              <li>Nombre y datos de la empresa</li>
+            </ul>
+            <p><strong style="color: var(--text);">Datos de interacciones del servicio:</strong></p>
+            <ul>
+              <li>Mensajes de WhatsApp procesados a través del servicio</li>
+              <li>Historial de conversaciones y respuestas de los agentes de IA</li>
+              <li>Registros de actividad y uso de la plataforma</li>
+              <li>Datos de automatizaciones ejecutadas</li>
+            </ul>
+            <p><strong style="color: var(--text);">Datos técnicos:</strong></p>
+            <ul>
+              <li>Dirección IP</li>
+              <li>Tipo de navegador y dispositivo</li>
+              <li>Páginas visitadas y tiempo de sesión</li>
+              <li>Registros de errores del sistema</li>
+            </ul>
+          </div>
+
+          <div class="legal-section" id="uso">
+            <h2><span class="num">3</span> Cómo usamos los datos</h2>
+            <p>Los datos recopilados se utilizan para:</p>
+            <ul>
+              <li><strong style="color: var(--text);">Prestar el servicio:</strong> operar los agentes de IA, ejecutar automatizaciones y proveer las funcionalidades de la plataforma.</li>
+              <li><strong style="color: var(--text);">Mejorar la plataforma:</strong> analizar el uso para identificar mejoras, corregir errores y optimizar el rendimiento del servicio.</li>
+              <li><strong style="color: var(--text);">Comunicación:</strong> enviar notificaciones del servicio, actualizaciones importantes y responder a consultas de soporte.</li>
+              <li><strong style="color: var(--text);">Seguridad:</strong> detectar y prevenir actividades fraudulentas o accesos no autorizados.</li>
+              <li><strong style="color: var(--text);">Cumplimiento legal:</strong> cumplir con obligaciones legales aplicables.</li>
+            </ul>
+            <p>No vendemos ni compartimos datos personales con terceros para fines de publicidad o marketing sin consentimiento explícito.</p>
+          </div>
+
+          <div class="legal-section" id="integraciones">
+            <h2><span class="num">4</span> Integraciones y automatizaciones</h2>
+            <p>RodAI opera a través de integraciones con servicios de terceros para proveer sus funcionalidades. Esto implica que los datos pueden fluir a través de estas integraciones.</p>
+            <div class="info-callout">
+              <p><strong>WhatsApp Business API:</strong> Los mensajes procesados a través de nuestros agentes de IA transitan por la API oficial de WhatsApp Business de Meta. El uso de esta integración está sujeto también a las políticas de privacidad de Meta.</p>
+            </div>
+            <div class="info-callout">
+              <p><strong>Sistemas de automatización:</strong> Utilizamos plataformas de automatización de flujos de trabajo para ejecutar procesos en nombre de nuestros clientes. Los datos necesarios para cada automatización fluyen a través de estos sistemas de manera controlada y con el único fin de ejecutar el servicio contratado.</p>
+            </div>
+            <p>RodAI selecciona proveedores de terceros que cuentan con políticas de privacidad y seguridad adecuadas, y únicamente comparte los datos estrictamente necesarios para la ejecución del servicio.</p>
+          </div>
+
+          <div class="legal-section" id="seguridad">
+            <h2><span class="num">5</span> Seguridad</h2>
+            <p>Implementamos medidas técnicas y organizativas razonables para proteger los datos contra accesos no autorizados, pérdida, alteración o divulgación. Estas medidas incluyen:</p>
+            <ul>
+              <li>Cifrado de datos en tránsito mediante HTTPS/TLS.</li>
+              <li>Control de acceso basado en roles dentro de la plataforma.</li>
+              <li>Monitoreo continuo de la infraestructura.</li>
+              <li>Revisiones periódicas de seguridad.</li>
+            </ul>
+            <p>Sin embargo, ningún sistema de seguridad es infalible. RodAI no puede garantizar la seguridad absoluta de los datos. En caso de una brecha de seguridad relevante, notificaremos a los usuarios afectados en el plazo razonablemente posible.</p>
+          </div>
+
+          <div class="legal-section" id="retencion">
+            <h2><span class="num">6</span> Retención de datos</h2>
+            <p>Conservamos los datos personales durante el tiempo necesario para cumplir con los fines descritos en esta política o según lo requiera la ley aplicable.</p>
+            <ul>
+              <li><strong style="color: var(--text);">Datos de cuenta:</strong> se conservan mientras la cuenta esté activa. Al cancelar el servicio, se eliminan o anonimizan en un plazo razonable.</li>
+              <li><strong style="color: var(--text);">Historial de conversaciones:</strong> se conserva por el período establecido en el plan contratado o hasta que el cliente solicite su eliminación.</li>
+              <li><strong style="color: var(--text);">Registros técnicos:</strong> se retienen por períodos limitados para fines de diagnóstico y seguridad.</li>
+            </ul>
+          </div>
+
+          <div class="legal-section" id="derechos">
+            <h2><span class="num">7</span> Tus derechos</h2>
+            <p>Tienes derecho a:</p>
+            <ul>
+              <li><strong style="color: var(--text);">Acceso:</strong> solicitar una copia de los datos personales que tenemos sobre ti.</li>
+              <li><strong style="color: var(--text);">Corrección:</strong> solicitar la corrección de datos inexactos o incompletos.</li>
+              <li><strong style="color: var(--text);">Eliminación:</strong> solicitar la eliminación de tus datos personales, sujeto a obligaciones legales.</li>
+              <li><strong style="color: var(--text);">Portabilidad:</strong> solicitar una exportación de tus datos en un formato estructurado.</li>
+              <li><strong style="color: var(--text);">Oposición:</strong> oponerte al procesamiento de tus datos en determinadas circunstancias.</li>
+            </ul>
+            <p>Para ejercer cualquiera de estos derechos, escríbenos a <a href="mailto:info@rodai.io" style="color: var(--blue);">info@rodai.io</a>. Responderemos en un plazo razonable.</p>
+          </div>
+
+          <div class="legal-section" id="cookies">
+            <h2><span class="num">8</span> Cookies</h2>
+            <p>Nuestro sitio web puede utilizar cookies y tecnologías similares para:</p>
+            <ul>
+              <li>Mantener tu sesión iniciada.</li>
+              <li>Recordar preferencias básicas.</li>
+              <li>Analizar el tráfico del sitio de forma agregada y anónima.</li>
+            </ul>
+            <p>Puedes configurar tu navegador para rechazar cookies, aunque esto puede afectar la funcionalidad de algunos elementos del sitio.</p>
+          </div>
+
+          <div class="legal-section" id="cambios">
+            <h2><span class="num">9</span> Cambios a esta política</h2>
+            <p>Podemos actualizar esta Política de Privacidad periódicamente para reflejar cambios en nuestras prácticas o en la ley aplicable. Los cambios significativos serán notificados por correo electrónico o mediante un aviso destacado en nuestra plataforma.</p>
+            <p>La fecha de "Última actualización" al inicio de este documento indica cuándo se realizaron los cambios más recientes. El uso continuado del servicio tras la publicación de cambios implica la aceptación de la política actualizada.</p>
+          </div>
+
+          <div class="legal-section" id="contacto">
+            <h2><span class="num">10</span> Contacto</h2>
+            <p>Si tienes preguntas, inquietudes o solicitudes relacionadas con esta Política de Privacidad o el tratamiento de tus datos personales, contáctanos:</p>
+            <ul>
+              <li><strong>Correo:</strong> <a href="mailto:info@rodai.io" style="color: var(--blue);">info@rodai.io</a></li>
+              <li><strong>País:</strong> El Salvador</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img src="/logo.jpg" alt="RodAI logo" />
+            <span>RODAI</span>
+          </div>
+          <p>Automatización con IA desde El Salvador</p>
+          <p><a href="mailto:info@rodai.io">info@rodai.io</a></p>
+          <p style="margin-top: 16px; font-size: .82rem;">© 2024 RodAI. Todos los derechos reservados.</p>
+        </div>
+        <div>
+          <h4>Sectores</h4>
+          <ul class="footer-links">
+            <li><a href="/para-inmobiliarias">Inmobiliarias</a></li>
+            <li><a href="/para-estetica">Estéticas</a></li>
+            <li><a href="/para-hoteles">Hoteles</a></li>
+            <li><a href="/para-automotriz">Talleres</a></li>
+            <li><a href="/para-gimnasios">Gimnasios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Empresa</h4>
+          <ul class="footer-links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/precios">Planes</a></li>
+            <li><a href="/nosotros">Nosotros</a></li>
+            <li><a href="/contact">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="/privacy">Política de Privacidad</a></li>
+            <li><a href="/terms">Términos de Servicio</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        El Salvador · <a href="mailto:info@rodai.io">info@rodai.io</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
